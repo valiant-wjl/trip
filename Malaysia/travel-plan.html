@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌊 沙巴海岛之旅 · 9天深度游</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0891b2;
+  --primary-dark: #0e7490;
+  --primary-light: #67e8f9;
+  --secondary: #059669;
+  --accent: #f59e0b;
+  --accent-light: #fcd34d;
+  --bg: #f0f9ff;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e0f2fe;
+  --shadow: 0 4px 24px rgba(8,145,178,0.10);
+  --shadow-hover: 0 8px 32px rgba(8,145,178,0.18);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --gradient: linear-gradient(135deg, #0891b2 0%, #059669 50%, #0e7490 100%);
+  --gradient-light: linear-gradient(135deg, #e0f9ff 0%, #d1fae5 100%);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(8,145,178,0.08);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+}
+.nav-logo { font-weight: 700; color: var(--primary); font-size: 1.05rem; white-space: nowrap; }
+.nav-links {
+  display: flex; gap: 4px; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none; font-size: 0.82rem;
+  padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+  transition: all 0.2s;
+}
+.nav-links a:hover { background: var(--gradient-light); color: var(--primary); }
+
+/* VERSION TOGGLE */
+.version-bar {
+  position: fixed; top: 56px; left: 0; right: 0; z-index: 99;
+  background: rgba(255,255,255,0.95); backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  gap: 12px; padding: 8px 16px;
+}
+.version-label { font-size: 0.82rem; color: var(--text-muted); }
+.version-btns { display: flex; gap: 6px; }
+.version-btn {
+  padding: 6px 18px; border-radius: 20px; border: 2px solid var(--primary);
+  font-size: 0.82rem; font-weight: 600; cursor: pointer;
+  font-family: inherit; transition: all 0.25s;
+  background: transparent; color: var(--primary);
+}
+.version-btn.active {
+  background: var(--gradient); color: #fff; border-color: transparent;
+  box-shadow: 0 3px 12px rgba(8,145,178,0.3);
+}
+
+/* HERO */
+.hero {
+  min-height: 100vh;
+  background: var(--gradient);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 120px 24px 80px;
+  position: relative; overflow: hidden;
+}
+.hero-title {
+  font-size: clamp(2rem, 6vw, 3.8rem);
+  font-weight: 900; color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  line-height: 1.2; margin-bottom: 16px;
+}
+.hero-sub {
+  font-size: clamp(1rem, 3vw, 1.4rem);
+  color: rgba(255,255,255,0.9); margin-bottom: 32px;
+}
+.hero-badges {
+  display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  margin-bottom: 40px;
+}
+.hero-badge {
+  background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; padding: 8px 20px; border-radius: 24px;
+  font-size: 0.9rem; font-weight: 500;
+}
+.hero-scroll { animation: bounce 2s infinite; color: rgba(255,255,255,0.8); font-size: 2rem; cursor: pointer; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(8px)} }
+
+/* SVG WAVE */
+.wave { position: absolute; bottom: 0; left: 0; right: 0; }
+
+/* SECTION */
+section { padding: 80px 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2.2rem); font-weight: 800;
+  color: var(--text); margin-bottom: 8px;
+}
+.section-title span { color: var(--primary); }
+.section-sub { color: var(--text-muted); margin-bottom: 40px; font-size: 0.95rem; }
+
+/* ROUTE TIMELINE */
+.route-timeline {
+  display: flex; align-items: center; justify-content: center;
+  gap: 0; flex-wrap: wrap; margin: 40px 0;
+}
+.route-node {
+  display: flex; flex-direction: column; align-items: center;
+  padding: 20px 24px;
+  background: var(--card-bg); border-radius: var(--radius);
+  box-shadow: var(--shadow); min-width: 140px; text-align: center;
+}
+.route-node .icon { font-size: 2rem; margin-bottom: 8px; }
+.route-node .city { font-weight: 700; color: var(--primary); font-size: 1.1rem; }
+.route-node .days { font-size: 0.8rem; color: var(--text-muted); }
+.route-arrow {
+  font-size: 1.5rem; color: var(--primary); padding: 0 8px;
+  display: flex; flex-direction: column; align-items: center;
+}
+.route-arrow .transport { font-size: 0.75rem; color: var(--text-muted); }
+
+/* FLIGHT CARDS */
+.flight-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-bottom: 32px; }
+.flight-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 24px; border-left: 4px solid var(--primary);
+  transition: box-shadow 0.25s, transform 0.25s;
+}
+.flight-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.flight-card.recommended { border-left-color: var(--accent); }
+.flight-badge {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 12px; margin-bottom: 12px;
+  background: var(--gradient); color: #fff;
+}
+.flight-badge.alt { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.flight-route { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+.flight-detail { color: var(--text-muted); font-size: 0.88rem; margin-bottom: 4px; }
+.flight-price { font-size: 1.5rem; font-weight: 800; color: var(--primary); margin: 12px 0; }
+.flight-link {
+  display: inline-block; background: var(--gradient); color: #fff;
+  text-decoration: none; padding: 8px 20px; border-radius: 20px;
+  font-size: 0.82rem; font-weight: 600; transition: opacity 0.2s;
+}
+.flight-link:hover { opacity: 0.85; }
+
+/* DAYS */
+.days-grid { display: flex; flex-direction: column; gap: 16px; }
+.day-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.day-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 20px 28px; cursor: pointer;
+  background: var(--gradient-light);
+  transition: background 0.2s;
+  user-select: none;
+}
+.day-header:hover { background: linear-gradient(135deg, #bae6fd 0%, #a7f3d0 100%); }
+.day-header-left { display: flex; align-items: center; gap: 16px; }
+.day-num {
+  background: var(--gradient); color: #fff;
+  font-weight: 800; font-size: 0.9rem; padding: 6px 14px; border-radius: 20px;
+  white-space: nowrap;
+}
+.day-title { font-size: 1.1rem; font-weight: 700; }
+.day-subtitle { font-size: 0.82rem; color: var(--text-muted); }
+.day-arrow {
+  font-size: 1.2rem; color: var(--primary);
+  transition: transform 0.3s;
+}
+.day-card.open .day-arrow { transform: rotate(180deg); }
+.day-body {
+  display: none; padding: 28px;
+  border-top: 1px solid var(--border);
+}
+.day-card.open .day-body { display: block; }
+
+/* TIMELINE ITEMS */
+.timeline { list-style: none; position: relative; padding-left: 28px; }
+.timeline::before {
+  content: ''; position: absolute; left: 8px; top: 0; bottom: 0;
+  width: 2px; background: var(--border);
+}
+.timeline li {
+  position: relative; margin-bottom: 20px;
+}
+.timeline li::before {
+  content: ''; position: absolute; left: -24px; top: 8px;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--primary); border: 2px solid #fff;
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+.timeline-time { font-size: 0.78rem; color: var(--primary); font-weight: 700; margin-bottom: 2px; }
+.timeline-text { font-size: 0.95rem; }
+.timeline-sub { font-size: 0.85rem; color: var(--text-muted); margin-top: 4px; }
+.tip-box {
+  background: linear-gradient(135deg, #fff7ed, #fef9c3);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm); padding: 12px 16px; margin-top: 16px;
+  font-size: 0.87rem; color: #92400e;
+}
+.version-content { display: none; }
+.version-content.show-a .ver-a { display: block; }
+.version-content.show-b .ver-b { display: block; }
+.ver-a, .ver-b { display: none; }
+
+/* SPOTS */
+.spots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.spot-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 24px; transition: transform 0.25s, box-shadow 0.25s;
+}
+.spot-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.spot-region {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1px; color: var(--primary); margin-bottom: 8px;
+}
+.spot-name { font-size: 1.05rem; font-weight: 700; margin-bottom: 6px; }
+.spot-stars { color: var(--accent); font-size: 1rem; margin-bottom: 8px; }
+.spot-desc { font-size: 0.85rem; color: var(--text-muted); }
+
+/* BUDGET */
+.budget-section { background: linear-gradient(135deg, #f0f9ff, #d1fae5); }
+.budget-version { display: none; }
+.budget-version.active { display: block; }
+.budget-table-wrap { overflow-x: auto; border-radius: var(--radius); box-shadow: var(--shadow); }
+table {
+  width: 100%; border-collapse: collapse;
+  background: var(--card-bg);
+}
+th {
+  background: var(--gradient); color: #fff; padding: 14px 20px;
+  text-align: left; font-size: 0.88rem; font-weight: 600;
+}
+td { padding: 13px 20px; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
+tr:last-child td { border-bottom: none; font-weight: 700; background: linear-gradient(135deg, #e0f9ff, #d1fae5); }
+.total-row { font-size: 1rem !important; color: var(--primary); }
+.budget-summary {
+  display: flex; gap: 20px; flex-wrap: wrap; margin-top: 24px;
+}
+.budget-card {
+  flex: 1; min-width: 160px;
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 20px; text-align: center;
+}
+.budget-card .amount { font-size: 1.8rem; font-weight: 800; color: var(--primary); }
+.budget-card .label { font-size: 0.82rem; color: var(--text-muted); margin-top: 4px; }
+
+/* FOOD */
+.food-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
+.food-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 20px; transition: transform 0.25s;
+}
+.food-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.food-rank { font-size: 1.5rem; margin-bottom: 8px; }
+.food-name { font-weight: 700; font-size: 1rem; margin-bottom: 4px; }
+.food-loc { font-size: 0.78rem; color: var(--primary); margin-bottom: 6px; }
+.food-dish { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 8px; }
+.food-price { font-size: 0.82rem; font-weight: 600; color: var(--secondary); }
+.food-warn { font-size: 0.75rem; color: #ef4444; margin-top: 4px; }
+
+/* PHOTO */
+.photo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 18px; }
+.photo-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden; transition: transform 0.25s;
+}
+.photo-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+.photo-icon {
+  height: 100px; display: flex; align-items: center; justify-content: center;
+  font-size: 3rem; background: var(--gradient-light);
+}
+.photo-info { padding: 16px; }
+.photo-name { font-weight: 700; margin-bottom: 4px; }
+.photo-time { font-size: 0.78rem; color: var(--primary); margin-bottom: 6px; }
+.photo-tip { font-size: 0.82rem; color: var(--text-muted); }
+
+/* PACKING */
+.packing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
+.packing-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow); padding: 24px;
+}
+.packing-cat { font-weight: 700; color: var(--primary); margin-bottom: 14px; font-size: 1rem; }
+.packing-item {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.88rem; margin-bottom: 9px; color: var(--text-muted);
+}
+.packing-item::before { content: '☐'; color: var(--primary); flex-shrink: 0; font-size: 1rem; }
+
+/* TIPS */
+.tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; }
+.tip-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 20px; display: flex; gap: 14px; align-items: flex-start;
+  transition: transform 0.2s;
+}
+.tip-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.tip-icon { font-size: 1.8rem; flex-shrink: 0; }
+.tip-text strong { display: block; font-size: 0.9rem; margin-bottom: 4px; }
+.tip-text span { font-size: 0.83rem; color: var(--text-muted); }
+
+/* FOOTER */
+footer {
+  background: var(--gradient); color: rgba(255,255,255,0.85);
+  text-align: center; padding: 40px 24px;
+}
+footer p { font-size: 0.85rem; margin-bottom: 6px; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .route-timeline { gap: 0; }
+  .route-node { min-width: 100px; padding: 14px 12px; }
+  .nav-links a { font-size: 0.75rem; padding: 5px 8px; }
+  .day-header { padding: 16px 18px; }
+  .day-body { padding: 18px; }
+  th, td { padding: 10px 14px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">🌊 沙巴之旅</div>
+    <div class="nav-links">
+      <a href="#overview">总览</a>
+      <a href="#flights">机票</a>
+      <a href="#itinerary">行程</a>
+      <a href="#spots">景点</a>
+      <a href="#watervilla">水屋</a>
+      <a href="#budget">预算</a>
+      <a href="#food">美食</a>
+      <a href="#photo">打卡</a>
+      <a href="#tips">贴士</a>
+    </div>
+  </div>
+</nav>
+
+<!-- VERSION BAR -->
+<div class="version-bar">
+  <span class="version-label">方案选择：</span>
+  <div class="version-btns">
+    <button class="version-btn active" id="btnA" onclick="setVersion('A')">🏠 版本A · 水屋版</button>
+    <button class="version-btn" id="btnB" onclick="setVersion('B')">💰 版本B · 经济版</button>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-title">🌊 沙巴海岛之旅<br>9天深度游</div>
+  <div class="hero-sub">亚庇 × 仙本那 · 2人同行</div>
+  <div class="hero-badges">
+    <span class="hero-badge">📅 2026年4月11日—19日</span>
+    <span class="hero-badge">✈️ 杭州出发</span>
+    <span class="hero-badge">🇲🇾 中国护照免签</span>
+    <span class="hero-badge">🐠 5次跳岛浮潜</span>
+  </div>
+  <div class="hero-scroll">↓</div>
+  <svg class="wave" viewBox="0 0 1440 80" preserveAspectRatio="none" style="height:80px">
+    <path fill="#f0f9ff" d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z"/>
+  </svg>
+</section>
+
+<!-- OVERVIEW -->
+<section id="overview">
+  <div class="container">
+    <div class="section-title">🗺️ 行程<span>总览</span></div>
+    <div class="section-sub">9天精华路线，亚庇文化+仙本那海岛，一次玩透沙巴</div>
+    <div class="route-timeline">
+      <div class="route-node">
+        <div class="icon">🏙️</div>
+        <div class="city">杭州</div>
+        <div class="days">出发地</div>
+      </div>
+      <div class="route-arrow">
+        <div>✈️</div>
+        <div class="transport">直飞 4h20m</div>
+      </div>
+      <div class="route-node" style="border: 2px solid var(--primary);">
+        <div class="icon">🌆</div>
+        <div class="city">亚庇</div>
+        <div class="days">Day1-4 · 3天</div>
+      </div>
+      <div class="route-arrow">
+        <div>🛩️</div>
+        <div class="transport">内段 50min</div>
+      </div>
+      <div class="route-node" style="border: 2px solid var(--secondary);">
+        <div class="icon">🏝️</div>
+        <div class="city">仙本那</div>
+        <div class="days">Day4-9 · 5天</div>
+      </div>
+      <div class="route-arrow">
+        <div>✈️</div>
+        <div class="transport">转机 11.5h</div>
+      </div>
+      <div class="route-node">
+        <div class="icon">🏠</div>
+        <div class="city">杭州</div>
+        <div class="days">回家</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FLIGHTS -->
+<section id="flights" style="background: linear-gradient(135deg, #e0f9ff 0%, #d1fae5 100%); padding: 80px 24px;">
+  <div class="container">
+    <div class="section-title">✈️ 机票<span>推荐</span></div>
+    <div class="section-sub">精选航班组合，2人总价约 ¥5,014 · 点击链接直接预订</div>
+    <div class="flight-grid">
+      <div class="flight-card">
+        <div class="flight-badge">推荐 · 去程</div>
+        <div class="flight-route">杭州 → 亚庇</div>
+        <div class="flight-detail">✈️ HGH → BKI 直飞</div>
+        <div class="flight-detail">📅 4月11日 21:45 → 次日 02:05</div>
+        <div class="flight-detail">⏱️ 飞行时间 4小时20分</div>
+        <div class="flight-price">¥1,865 <small style="font-size:0.9rem;color:var(--text-muted)">/ 2人</small></div>
+        <a href="https://on.kiwi.com/l7ErUO" target="_blank" class="flight-link">查看预订 →</a>
+      </div>
+      <div class="flight-card">
+        <div class="flight-badge">推荐 · 内段</div>
+        <div class="flight-route">亚庇 → 斗湖</div>
+        <div class="flight-detail">✈️ BKI → TWU 直飞</div>
+        <div class="flight-detail">📅 4月14日 13:40 → 14:30</div>
+        <div class="flight-detail">⏱️ 飞行时间 50分钟</div>
+        <div class="flight-price">¥368 <small style="font-size:0.9rem;color:var(--text-muted)">/ 2人</small></div>
+        <a href="https://on.kiwi.com/pekSWx" target="_blank" class="flight-link">查看预订 →</a>
+      </div>
+      <div class="flight-card">
+        <div class="flight-badge">推荐 · 回程</div>
+        <div class="flight-route">斗湖 → 杭州</div>
+        <div class="flight-detail">✈️ TWU → KUL → HGH 转机</div>
+        <div class="flight-detail">📅 4月19日 11:30 → 23:00</div>
+        <div class="flight-detail">⏱️ 总时长 11.5小时</div>
+        <div class="flight-price">¥2,781 <small style="font-size:0.9rem;color:var(--text-muted)">/ 2人</small></div>
+        <a href="https://on.kiwi.com/5eb9rN" target="_blank" class="flight-link">查看预订 →</a>
+      </div>
+    </div>
+    <div style="background: var(--card-bg); border-radius: var(--radius); padding: 24px; box-shadow: var(--shadow);">
+      <div style="font-weight:700; margin-bottom:14px; color:var(--text-muted)">💡 备选去程（更省钱）</div>
+      <div class="flight-grid" style="margin:0">
+        <div style="padding:16px; background: var(--gradient-light); border-radius: var(--radius-sm);">
+          <div class="flight-badge alt">备选1 · 隔天到</div>
+          <div style="font-weight:700; margin-bottom:4px">杭州 → 亚庇 直飞</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px">4月12日出发 · 节省¥161</div>
+          <div style="font-size:1.3rem; font-weight:800; color:var(--accent); margin-bottom:10px">¥1,704 / 2人</div>
+          <a href="https://on.kiwi.com/ORNkR1" target="_blank" class="flight-link" style="background: linear-gradient(135deg,#f59e0b,#d97706)">查看预订 →</a>
+        </div>
+        <div style="padding:16px; background: var(--gradient-light); border-radius: var(--radius-sm);">
+          <div class="flight-badge alt">备选2 · 最便宜</div>
+          <div style="font-weight:700; margin-bottom:4px">上海转机 → 亚庇</div>
+          <div style="font-size:0.85rem; color:var(--text-muted); margin-bottom:8px">经上海中转 · 节省¥438</div>
+          <div style="font-size:1.3rem; font-weight:800; color:var(--accent); margin-bottom:10px">¥1,427 / 2人</div>
+          <a href="https://on.kiwi.com/BpZLqE" target="_blank" class="flight-link" style="background: linear-gradient(135deg,#f59e0b,#d97706)">查看预订 →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ITINERARY -->
+<section id="itinerary">
+  <div class="container">
+    <div class="section-title">📅 每日<span>行程</span></div>
+    <div class="section-sub">点击日期卡片展开详情 · Day7-8内容随版本切换变化</div>
+    <div class="days-grid">
+
+      <!-- DAY 1 -->
+      <div class="day-card" id="day1">
+        <div class="day-header" onclick="toggleDay('day1')">
+          <div class="day-header-left">
+            <span class="day-num">Day 1 · 4/11 周六</span>
+            <div>
+              <div class="day-title">杭州 → 亚庇</div>
+              <div class="day-subtitle">启程出发，深夜飞行</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li><div class="timeline-time">21:45</div><div class="timeline-text">🛫 杭州萧山机场出发</div><div class="timeline-sub">提前2小时到机场 · 直飞亚庇HGH→BKI</div></li>
+            <li><div class="timeline-time">次日 02:05（当地时间）</div><div class="timeline-text">🛬 抵达亚庇国际机场</div><div class="timeline-sub">深夜入境，前往酒店休息</div></li>
+            <li><div class="timeline-time">入住</div><div class="timeline-text">🏨 市中心四星酒店</div><div class="timeline-sub">推荐加雅街附近 · 约¥300-500/晚</div></li>
+          </ul>
+          <div class="tip-box">💡 Tips: 机场买当地SIM卡（Celcom/Digi，约30-50马币），换些马币现金。无时差，轻松适应！</div>
+        </div>
+      </div>
+
+      <!-- DAY 2 -->
+      <div class="day-card" id="day2">
+        <div class="day-header" onclick="toggleDay('day2')">
+          <div class="day-header-left">
+            <span class="day-num">Day 2 · 4/12 周日</span>
+            <div>
+              <div class="day-title">亚庇 · 环滩岛 + 丹绒亚路日落</div>
+              <div class="day-subtitle">世界前三日落 + 私人海岛浮潜</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li><div class="timeline-time">07:30</div><div class="timeline-text">🏨 酒店集合出发</div></li>
+            <li><div class="timeline-time">09:00 - 15:00</div><div class="timeline-text">🏝️ 环滩岛一日游</div><div class="timeline-sub">亚庇最高端海岛 · 私人岛屿 · 水质清澈珊瑚丰富<br>浮潜2-3次 + 白沙滩拍照 · 含午餐和浮潜装备<br>💰 约¥350-500/人</div></li>
+            <li><div class="timeline-time">17:30</div><div class="timeline-text">🌅 丹绒亚路海滩看日落</div><div class="timeline-sub">世界前三日落！提前到达占位 · 会堵车<br>最佳拍照时间：18:00-18:30</div></li>
+            <li><div class="timeline-time">19:30</div><div class="timeline-text">🍽️ 晚餐：大茄来海鲜餐厅</div><div class="timeline-sub">招牌奶油老虎虾必点 · 人均约100马币</div></li>
+          </ul>
+          <div class="tip-box">💡 Tips: 涂好防晒SPF50+，穿沙滩鞋。回程打车可能困难，提前安排。</div>
+        </div>
+      </div>
+
+      <!-- DAY 3 -->
+      <div class="day-card" id="day3">
+        <div class="day-header" onclick="toggleDay('day3')">
+          <div class="day-header-left">
+            <span class="day-num">Day 3 · 4/13 周一</span>
+            <div>
+              <div class="day-title">亚庇 · 文化深度游 + 萤火虫</div>
+              <div class="day-subtitle">清真寺 · 红树林 · 如银河般的萤火虫</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li><div class="timeline-time">08:00</div><div class="timeline-text">🍜 早餐：佑记肉骨茶</div><div class="timeline-sub">加雅街 · "沙巴第一汤" · 人均约30马币</div></li>
+            <li><div class="timeline-time">09:30</div><div class="timeline-text">🕌 水上清真寺（City Mosque）</div><div class="timeline-sub">人工湖畔，倒影如漂浮水面 · 清晨拍照最佳<br>非穆斯林可入内（穿着整齐）</div></li>
+            <li><div class="timeline-time">11:00</div><div class="timeline-text">🏫 沙巴大学 + 粉红清真寺</div><div class="timeline-sub">东南亚最美大学 · 粉红色建筑超适合拍照<br>⚠️ 注意：周五不开放</div></li>
+            <li><div class="timeline-time">12:30</div><div class="timeline-text">🍜 午餐：怡丰茶室</div><div class="timeline-sub">叻沙必点 · 另推牛杂米线 · 人均约15马币</div></li>
+            <li><div class="timeline-time">14:00</div><div class="timeline-text">🌿 出发前往红树林</div></li>
+            <li><div class="timeline-time">15:00 - 16:30</div><div class="timeline-text">🐒 红树林巡游看长鼻猴</div></li>
+            <li><div class="timeline-time">17:00 - 18:00</div><div class="timeline-text">🌅 欣赏红树林日落</div></li>
+            <li><div class="timeline-time">19:00 - 20:00</div><div class="timeline-text">✨ 萤火虫之旅</div><div class="timeline-sub">如银河般壮观！含简餐 · 💰 约¥200-300/人</div></li>
+          </ul>
+          <div class="tip-box">💡 Tips: 带长袖参观清真寺；红树林蚊子多，务必带驱蚊液！</div>
+        </div>
+      </div>
+
+      <!-- DAY 4 -->
+      <div class="day-card" id="day4">
+        <div class="day-header" onclick="toggleDay('day4')">
+          <div class="day-header-left">
+            <span class="day-num">Day 4 · 4/14 周二</span>
+            <div>
+              <div class="day-title">亚庇 → 仙本那</div>
+              <div class="day-subtitle">飞往仙本那，海鲜市场觅食</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li><div class="timeline-time">08:00</div><div class="timeline-text">🍞 早餐：富源茶室咖椰吐司</div><div class="timeline-sub">加雅街 · 游客造访率最高 · 人均约10马币</div></li>
+            <li><div class="timeline-time">09:00 - 11:00</div><div class="timeline-text">🕐 自由活动</div><div class="timeline-sub">选A：可可山看全景（网红秋千，约¥150-300/人）<br>选B：加雅街逛街购物 + 榴莲街</div></li>
+            <li><div class="timeline-time">11:30</div><div class="timeline-text">🍜 午餐：家香生肉面</div><div class="timeline-sub">1982年创建 · "亚庇第一家生肉面" · 人均约12马币</div></li>
+            <li><div class="timeline-time">13:40</div><div class="timeline-text">🛫 亚庇飞斗湖（50分钟）</div></li>
+            <li><div class="timeline-time">14:30</div><div class="timeline-text">🛬 抵达斗湖机场</div></li>
+            <li><div class="timeline-time">15:00</div><div class="timeline-text">🚗 包车/拼车前往仙本那</div><div class="timeline-sub">约1.5小时 · 90马币/车 或 43元/人拼车</div></li>
+            <li><div class="timeline-time">16:30</div><div class="timeline-text">🏨 入住仙本那酒店</div><div class="timeline-sub">推荐海丰酒店附近 · 约¥200-300/晚</div></li>
+            <li><div class="timeline-time">18:00</div><div class="timeline-text">🦐 海鲜市场！</div><div class="timeline-sub">海风酒店后侧码头 · 晚8点后可按3折砍价！<br>买完拿到肥妈/天下客加工（约5马币/公斤）</div></li>
+          </ul>
+          <div class="tip-box">💡 Tips: 提前在淘宝购买亚航行李额，比现场便宜很多！</div>
+        </div>
+      </div>
+
+      <!-- DAY 5 -->
+      <div class="day-card" id="day5">
+        <div class="day-header" onclick="toggleDay('day5')">
+          <div class="day-header-left">
+            <span class="day-num">Day 5 · 4/15 周三</span>
+            <div>
+              <div class="day-title">仙本那 · 敦沙卡兰海洋公园</div>
+              <div class="day-subtitle">珍珠岛登顶 · 巴瑶族 · 玻璃海浮潜</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li><div class="timeline-time">07:30</div><div class="timeline-text">⛵ 码头集合出发</div></li>
+            <li><div class="timeline-time">08:30</div><div class="timeline-text">👨‍👩‍👧‍👦 探访巴瑶族水上村落</div><div class="timeline-sub">"海上吉普赛人"的世界</div></li>
+            <li><div class="timeline-time">10:00</div><div class="timeline-text">⛰️ 珍珠岛登山</div><div class="timeline-sub">约45分钟 · 山顶俯瞰全景超震撼！<br>⚠️ 必须穿运动鞋！下雨天禁止登山</div></li>
+            <li><div class="timeline-time">12:00</div><div class="timeline-text">🏝️ 军舰岛午餐 + 浮潜</div><div class="timeline-sub">三分之一被沙滩环绕 · 浅水区大面积珊瑚</div></li>
+            <li><div class="timeline-time">14:00</div><div class="timeline-text">🐢 曼达布安岛浮潜</div><div class="timeline-sub">奶蓝色海水 · 可能看到海龟和鱼群风暴！</div></li>
+            <li><div class="timeline-time">16:00</div><div class="timeline-text">🏠 返回仙本那镇</div></li>
+            <li><div class="timeline-time">17:00</div><div class="timeline-text">🍽️ 晚餐：肥妈海鲜楼</div><div class="timeline-sub">仙本那人气第一！咸蛋黄蟹膏、奶油老虎虾<br>⚠️ 需提前占位，17:00去比较好</div></li>
+          </ul>
+          <div class="tip-box">💡 全天户外，防晒衣+防晒霜反复涂！一价全包约¥289/人。</div>
+        </div>
+      </div>
+
+      <!-- DAY 6 -->
+      <div class="day-card" id="day6">
+        <div class="day-header" onclick="toggleDay('day6')">
+          <div class="day-header-left">
+            <span class="day-num">Day 6 · 4/16 周四</span>
+            <div>
+              <div class="day-title">仙本那 · 马达京三岛游</div>
+              <div class="day-subtitle">海龟基地 · 拖尾沙滩 · 极丰富海底世界</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li><div class="timeline-time">07:30</div><div class="timeline-text">⛵ 码头集合</div></li>
+            <li><div class="timeline-time">08:30</div><div class="timeline-text">🐢 马达京岛浮潜</div><div class="timeline-sub">浮潜最佳据点 · 海底资源极丰富 · 海龟养育基地<br>大小马达京退潮时沙滩相连可步行！</div></li>
+            <li><div class="timeline-time">11:00</div><div class="timeline-text">🏊 邦邦岛浮潜</div></li>
+            <li><div class="timeline-time">12:30</div><div class="timeline-text">🍽️ 午餐</div></li>
+            <li><div class="timeline-time">13:30</div><div class="timeline-text">🌊 汀巴汀巴岛浮潜</div></li>
+            <li><div class="timeline-time">16:00</div><div class="timeline-text">🏠 返回仙本那</div></li>
+            <li><div class="timeline-time">18:00</div><div class="timeline-text">🍽️ 晚餐：海景海鲜楼</div><div class="timeline-sub">湿奶油老虎虾、蛋黄蟹、拉沙海鲜面 · 人均约60马币</div></li>
+          </ul>
+          <div class="tip-box">💡 连续两天跳岛会比较累，晚上早点休息！一价全包约¥289/人。</div>
+        </div>
+      </div>
+
+      <!-- DAY 7 - VERSION -->
+      <div class="day-card" id="day7">
+        <div class="day-header" onclick="toggleDay('day7')">
+          <div class="day-header-left">
+            <span class="day-num">Day 7 · 4/17 周五</span>
+            <div>
+              <div class="day-title" id="day7title">仙本那 · 水屋入住</div>
+              <div class="day-subtitle" id="day7sub">随版本切换变化</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="version-content" id="day7content">
+            <div class="ver-a">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
+                <span style="background:var(--gradient);color:#fff;padding:4px 12px;border-radius:12px;font-size:0.8rem;font-weight:700">🏠 版本A · 水屋版</span>
+              </div>
+              <ul class="timeline">
+                <li><div class="timeline-time">10:00</div><div class="timeline-text">🚤 出发前往水屋度假村</div></li>
+                <li><div class="timeline-time">入住</div><div class="timeline-text">🏠 水屋两种选择：</div>
+                  <div class="timeline-sub">
+                    <strong>新佳马达水屋</strong>（性价比之选）：约¥1,400/人/2晚<br>含每日跳岛、三餐、浮潜装备 · 提前1-2个月预订<br><br>
+                    <strong>卡帕莱水屋</strong>（东南亚最美水屋）：约¥3,200/人/2晚<br>51间海上别墅，360度海景，含三餐和浮潜 · ⚠️需提前半年预订！
+                  </div>
+                </li>
+                <li><div class="timeline-time">下午</div><div class="timeline-text">🏊 水屋平台浮潜 + 拍照</div></li>
+                <li><div class="timeline-time">傍晚</div><div class="timeline-text">🌅 坐在水屋阳台看海上日落</div></li>
+                <li><div class="timeline-time">晚餐</div><div class="timeline-text">🍽️ 度假村含三餐</div></li>
+              </ul>
+            </div>
+            <div class="ver-b">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
+                <span style="background:linear-gradient(135deg,#059669,#047857);color:#fff;padding:4px 12px;border-radius:12px;font-size:0.8rem;font-weight:700">💰 版本B · 经济版</span>
+              </div>
+              <ul class="timeline">
+                <li><div class="timeline-time">07:30</div><div class="timeline-text">⛵ 码头集合</div></li>
+                <li><div class="timeline-time">全天</div><div class="timeline-text">🏊 马布岛 + 卡帕莱浮潜一日游</div>
+                  <div class="timeline-sub">马布岛：世界顶级漫潜之地，海洋生物超丰富<br>卡帕莱：水屋外围浮潜，能见度极好<br>可看到海龟、墨鱼、蓝环章鱼<br>💰 约¥289/人</div>
+                </li>
+                <li><div class="timeline-time">晚餐</div><div class="timeline-text">🍽️ 天旺海鲜楼</div><div class="timeline-sub">码头岸边 · 咸蛋皇虾、柠檬汁鱼</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 8 - VERSION -->
+      <div class="day-card" id="day8">
+        <div class="day-header" onclick="toggleDay('day8')">
+          <div class="day-header-left">
+            <span class="day-num">Day 8 · 4/18 周六</span>
+            <div>
+              <div class="day-title" id="day8title">仙本那 · 水屋第二天</div>
+              <div class="day-subtitle" id="day8sub">随版本切换变化</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <div class="version-content" id="day8content">
+            <div class="ver-a">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
+                <span style="background:var(--gradient);color:#fff;padding:4px 12px;border-radius:12px;font-size:0.8rem;font-weight:700">🏠 版本A · 水屋版</span>
+              </div>
+              <ul class="timeline">
+                <li><div class="timeline-time">清晨</div><div class="timeline-text">🌅 早起看海上日出</div></li>
+                <li><div class="timeline-time">上午</div><div class="timeline-text">🏊 度假村周边浮潜或深潜体验</div></li>
+                <li><div class="timeline-time">下午</div><div class="timeline-text">☀️ 水屋阳台发呆放松</div><div class="timeline-sub">享受最后的海岛时光，各种水屋美拍</div></li>
+                <li><div class="timeline-time">15:00-16:00</div><div class="timeline-text">🚤 返回仙本那镇</div></li>
+                <li><div class="timeline-time">晚餐</div><div class="timeline-text">🍽️ 海丰海鲜蒸汽火锅</div><div class="timeline-sub">最后一顿海鲜大餐！</div></li>
+              </ul>
+            </div>
+            <div class="ver-b">
+              <div style="display:flex;gap:10px;align-items:center;margin-bottom:16px">
+                <span style="background:linear-gradient(135deg,#059669,#047857);color:#fff;padding:4px 12px;border-radius:12px;font-size:0.8rem;font-weight:700">💰 版本B · 经济版</span>
+              </div>
+              <ul class="timeline">
+                <li><div class="timeline-time">早晨</div><div class="timeline-text">😴 睡到自然醒（连续跳岛后的休息日）</div></li>
+                <li><div class="timeline-time">10:00</div><div class="timeline-text">🚶 仙本那镇上闲逛</div></li>
+                <li><div class="timeline-time">午餐</div><div class="timeline-text">🍜 肉骨茶 + 当地小吃</div><div class="timeline-sub">Sodo细米粉、鸡汤面</div></li>
+                <li><div class="timeline-time">下午</div><div class="timeline-text">💆 按摩spa放松</div><div class="timeline-sub">镇上有很多平价按摩店</div></li>
+                <li><div class="timeline-time">晚餐</div><div class="timeline-text">🍽️ 海丰海鲜蒸汽火锅</div><div class="timeline-sub">最后一顿海鲜大餐！</div></li>
+                <li><div class="timeline-time">晚上</div><div class="timeline-text">🛍️ 购买伴手礼</div></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- DAY 9 -->
+      <div class="day-card" id="day9">
+        <div class="day-header" onclick="toggleDay('day9')">
+          <div class="day-header-left">
+            <span class="day-num">Day 9 · 4/19 周日</span>
+            <div>
+              <div class="day-title">仙本那 → 杭州</div>
+              <div class="day-subtitle">踏上归途，满载美好回忆</div>
+            </div>
+          </div>
+          <div class="day-arrow">▼</div>
+        </div>
+        <div class="day-body">
+          <ul class="timeline">
+            <li><div class="timeline-time">07:00</div><div class="timeline-text">🏨 退房</div><div class="timeline-sub">打车/拼车前往斗湖机场（约1.5小时）</div></li>
+            <li><div class="timeline-time">11:30</div><div class="timeline-text">🛫 斗湖起飞</div><div class="timeline-sub">经吉隆坡转机，约3小时候机</div></li>
+            <li><div class="timeline-time">免税区</div><div class="timeline-text">🛍️ 吉隆坡机场免税店购物</div></li>
+            <li><div class="timeline-time">17:30</div><div class="timeline-text">🛫 吉隆坡飞杭州</div></li>
+            <li><div class="timeline-time">23:00</div><div class="timeline-text">🏠 抵达杭州萧山机场</div><div class="timeline-sub">欢迎回家！</div></li>
+          </ul>
+          <div class="tip-box">💡 斗湖机场很小，提前1小时到即可。吉隆坡转机3小时足够购物。</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SPOTS -->
+<section id="spots" style="background: linear-gradient(135deg, #f0f9ff 0%, #ecfdf5 100%);">
+  <div class="container">
+    <div class="section-title">🏝️ 必去<span>景点</span></div>
+    <div class="section-sub">精选仙本那与亚庇核心打卡地，按推荐度排序</div>
+    <div style="font-weight:700;color:var(--primary);margin-bottom:16px;font-size:1rem">📍 仙本那</div>
+    <div class="spots-grid" style="margin-bottom:32px">
+      <div class="spot-card">
+        <div class="spot-region">仙本那 · 必去</div>
+        <div class="spot-name">敦沙卡兰海洋公园</div>
+        <div class="spot-stars">★★★★★</div>
+        <div class="spot-desc">8个小岛组成，火山湖地貌。珍珠岛登顶必去，俯瞰全景令人震撼。巴瑶族水上村落独一无二。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-region">仙本那 · 必去</div>
+        <div class="spot-name">马达京岛</div>
+        <div class="spot-stars">★★★★★</div>
+        <div class="spot-desc">浮潜天堂，海龟养育基地。退潮时大小马达京之间沙滩相连，可步行穿越！</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-region">仙本那 · 推荐</div>
+        <div class="spot-name">马布岛 + 卡帕莱</div>
+        <div class="spot-stars">★★★★</div>
+        <div class="spot-desc">世界顶级漫潜之地，海洋生物超丰富。卡帕莱水屋是东南亚最美水屋之一。</div>
+      </div>
+    </div>
+    <div style="font-weight:700;color:var(--primary);margin-bottom:16px;font-size:1rem">📍 亚庇</div>
+    <div class="spots-grid" style="margin-bottom:32px">
+      <div class="spot-card">
+        <div class="spot-region">亚庇 · 必去</div>
+        <div class="spot-name">丹绒亚路日落</div>
+        <div class="spot-stars">★★★★★</div>
+        <div class="spot-desc">世界前三日落！免费观看，面朝大海金光洒落。建议17:30前到达占位，会堵车。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-region">亚庇 · 必去</div>
+        <div class="spot-name">环滩岛</div>
+        <div class="spot-stars">★★★★★</div>
+        <div class="spot-desc">亚庇最美私人海岛，人少景美，水质清澈，珊瑚颜色丰富多样。浮潜2-3次。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-region">亚庇 · 推荐</div>
+        <div class="spot-name">红树林萤火虫</div>
+        <div class="spot-stars">★★★★</div>
+        <div class="spot-desc">长鼻猴巡游 + 银河般的萤火虫之旅，体验东南亚独特的夜晚奇景。</div>
+      </div>
+      <div class="spot-card">
+        <div class="spot-region">亚庇 · 推荐</div>
+        <div class="spot-name">水上清真寺</div>
+        <div class="spot-stars">★★★★</div>
+        <div class="spot-desc">人工湖畔的梦幻清真寺，湖面倒影如漂浮在水面，清晨拍照最佳，非穆斯林可入内。</div>
+      </div>
+    </div>
+    <div style="font-weight:700;color:var(--text-muted);margin-bottom:16px;font-size:1rem">💡 可选景点</div>
+    <div class="spots-grid">
+      <div class="spot-card" style="opacity:0.85">
+        <div class="spot-region">亚庇 · 可选</div>
+        <div class="spot-name">神山一日游</div>
+        <div class="spot-stars">★★★★</div>
+        <div class="spot-desc">世界遗产级别，ATV+温泉。一日游只到1500-1800米，无高反风险，适合大众游客。</div>
+      </div>
+      <div class="spot-card" style="opacity:0.85">
+        <div class="spot-region">亚庇 · 可选</div>
+        <div class="spot-name">美人鱼岛</div>
+        <div class="spot-stars">★★★★</div>
+        <div class="spot-desc">Tiffany蓝色海水，限流85人/天，需提前预约。海水颜色非常梦幻。</div>
+      </div>
+      <div class="spot-card" style="opacity:0.85">
+        <div class="spot-region">亚庇 · 可选</div>
+        <div class="spot-name">可可山</div>
+        <div class="spot-stars">★★★</div>
+        <div class="spot-desc">俯瞰亚庇全景的网红打卡地，网红秋千和滑翔伞，约¥150-300/人。</div>
+      </div>
+      <div class="spot-card" style="opacity:0.85">
+        <div class="spot-region">亚庇 · 可选</div>
+        <div class="spot-name">沙巴大学+粉红清真寺</div>
+        <div class="spot-stars">★★★</div>
+        <div class="spot-desc">东南亚最美大学，粉红色建筑与蓝天绝美搭配。注意：周五不对外开放。</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- WATER VILLA -->
+<section id="watervilla" style="padding: 80px 24px;">
+  <div class="container">
+    <div class="section-title">🏠 水屋<span>对比</span></div>
+    <div class="section-sub">仙本那四大水屋度假村详细对比，帮你决定住不住、住哪家</div>
+
+    <!-- 水屋对比表 -->
+    <div style="overflow-x:auto;margin-bottom:40px;">
+      <table style="width:100%;border-collapse:separate;border-spacing:0;background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;">
+        <thead>
+          <tr style="background:var(--gradient);color:#fff;">
+            <th style="padding:16px 14px;text-align:left;font-size:0.9rem;">对比项</th>
+            <th style="padding:16px 14px;text-align:center;font-size:0.9rem;">🏆 卡帕莱<br><small>最美水屋</small></th>
+            <th style="padding:16px 14px;text-align:center;font-size:0.9rem;">💰 新佳马达<br><small>性价比之王</small></th>
+            <th style="padding:16px 14px;text-align:center;font-size:0.9rem;">✨ SWV 马布岛<br><small>轻奢之选</small></th>
+            <th style="padding:16px 14px;text-align:center;font-size:0.9rem;">👑 MWB 马布岛<br><small>顶级奢华</small></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">💲 价格<br><small style="color:var(--text-muted)">2人/2晚</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;"><strong style="color:#e11d48;">~¥6,400</strong><br><small>~¥3,200/人</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;"><strong style="color:var(--secondary);">~¥2,800</strong><br><small>~¥1,400/人</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;"><strong style="color:var(--primary);">~¥7,700</strong><br><small>~¥3,850/人</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;"><strong style="color:#7c3aed;">~¥10,000+</strong><br><small>最贵水屋</small></td>
+          </tr>
+          <tr style="background:#f8fafc">
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">📍 位置</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">诗巴丹与马布岛之间<br><small>船程45分钟</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">仙本那镇附近<br><small>船程仅15分钟</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">马布岛<br><small>船程约40分钟</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">马布岛<br><small>船程约40分钟</small></td>
+          </tr>
+          <tr>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">🏠 房间</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">71间·60㎡<br>独立阳台+浴缸<br><small>不可选房，随机分配</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">多种房型(A-F)<br>设施简洁<br><small>标准房/套房/阳台房</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">5种房型<br>部分有空调<br><small>超豪华房有按摩浴缸</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">4种房型·全空调<br>世界奢华酒店奖<br><small>大部分含按摩浴缸</small></td>
+          </tr>
+          <tr style="background:#f8fafc">
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">🍽️ 餐饮</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">✅ 含三餐</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">✅ 含三餐+下午茶<br><small>自助餐，菜式较固定</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">✅ 含三餐</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">✅ 含三餐</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">🏊 浮潜/跳岛</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">含免费浮潜<br>水屋下方即可浮潜<br><small>能见度极好</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">✅ 每日免费跳岛游<br>含浮潜装备<br><small>每天不同岛屿</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">✅ 免费跳岛+浮潜<br>免费租借浮潜装备<br><small>仙本那唯一免费装备</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">免费浮潜+玻璃船<br>可在多岛船潜<br><small>两房一厅可直接下海</small></td>
+          </tr>
+          <tr style="background:#f8fafc">
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">🌊 海水质量</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">⭐⭐⭐⭐⭐<br><small>360°透明海水</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">⭐⭐⭐<br><small>离镇近，水质一般</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">⭐⭐⭐⭐<br><small>远离陆地，水质好</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">⭐⭐⭐⭐<br><small>同SWV，水质好</small></td>
+          </tr>
+          <tr>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">📅 预订难度</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;"><strong style="color:#e11d48;">⚠️ 提前半年</strong><br><small>非常抢手！</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;color:var(--secondary);">提前1-2个月<br><small>相对容易</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">提前2-3个月<br><small>热门时段紧张</small></td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">提前2-3个月<br><small>价高但也紧张</small></td>
+          </tr>
+          <tr style="background:#f8fafc">
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);font-weight:600;">💑 适合人群</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">情侣蜜月<br>拍照打卡<br>潜水爱好者</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">预算有限<br>想体验水屋<br>潜水考证</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">追求性价比<br>蜜月（免费布置）<br>浮潜为主</td>
+            <td style="padding:12px 14px;border-bottom:1px solid var(--border);text-align:center;">预算充足<br>追求奢华体验<br>深潜爱好者</td>
+          </tr>
+          <tr>
+            <td style="padding:12px 14px;font-weight:600;">⭐ 综合评分</td>
+            <td style="padding:12px 14px;text-align:center;"><strong style="font-size:1.3rem;color:var(--accent);">9.2</strong>/10<br><small>携程261条评价</small></td>
+            <td style="padding:12px 14px;text-align:center;"><strong style="font-size:1.3rem;color:var(--accent);">8.0</strong>/10<br><small>Tripadvisor 4.0★</small></td>
+            <td style="padding:12px 14px;text-align:center;"><strong style="font-size:1.3rem;color:var(--accent);">8.5</strong>/10<br><small>马布岛性价比最高</small></td>
+            <td style="padding:12px 14px;text-align:center;"><strong style="font-size:1.3rem;color:var(--accent);">9.0</strong>/10<br><small>世界奢华酒店奖</small></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 推荐卡片 -->
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:24px;margin-bottom:32px;">
+      <!-- 卡帕莱 -->
+      <div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:2px solid var(--accent);">
+        <div style="background:linear-gradient(135deg,#0891b2,#06b6d4);padding:20px;color:#fff;">
+          <div style="font-size:0.85rem;opacity:0.9;">🏆 东南亚最美水屋</div>
+          <div style="font-size:1.3rem;font-weight:900;margin:4px 0;">卡帕莱 Kapalai</div>
+          <div style="font-size:0.85rem;">Sipadan Kapalai Dive Resort</div>
+        </div>
+        <div style="padding:20px;">
+          <div style="font-size:0.9rem;line-height:1.8;margin-bottom:16px;">
+            <strong>亮点：</strong>真正360°全海景水屋，抖音/小红书爆火。71间房建在海中沙洲上，脚下就是透明海水。房间60㎡含独立阳台、浴缸。可看海龟、墨鱼、蓝环章鱼。<br><br>
+            <strong>房间分配：</strong>不能指定房间，到达后随机分配。52-61号为新修水屋，露台大一倍，270°海景，设施最新。<br><br>
+            <strong>船班：</strong>仙本那出发45分钟。入岛10:00/12:30/15:30，离岛06:30/09:30/13:30<br><br>
+            <strong>注意：</strong>预订后不可改期/退款。建议先订房再买机票。
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <a href="https://hotels.ctrip.com/hotels/47993658.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:var(--gradient);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">📱 携程预订</a>
+            <a href="https://www.hellodive.com/resort/view/Kapalai_Dive_Resort.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:#1e293b;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">🤿 HelloDive</a>
+            <a href="https://zhuanlan.zhihu.com/p/98298283" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:#0066ff;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">📖 知乎攻略</a>
+          </div>
+          <div style="color:var(--text-muted);font-size:0.8rem;">💡 价格约¥3,200/人/2晚（含餐+浮潜）· 需提前半年预订</div>
+        </div>
+      </div>
+      <!-- 新佳马达 -->
+      <div style="background:var(--card-bg);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden;border:2px solid var(--secondary);">
+        <div style="background:linear-gradient(135deg,#059669,#10b981);padding:20px;color:#fff;">
+          <div style="font-size:0.85rem;opacity:0.9;">💰 性价比之王</div>
+          <div style="font-size:1.3rem;font-weight:900;margin:4px 0;">新佳马达 Singamata</div>
+          <div style="font-size:0.85rem;">Singamata Reef Resort</div>
+        </div>
+        <div style="padding:20px;">
+          <div style="font-size:0.9rem;line-height:1.8;margin-bottom:16px;">
+            <strong>亮点：</strong>仙本那性价比最高水屋！360°海景，一价全含（住宿+三餐+下午茶+每日跳岛游+浮潜装备）。离镇上仅15分钟船程，单人入住不用补房差。<br><br>
+            <strong>跳岛安排：</strong>每天免费不同海岛（珍珠岛、军舰岛、马布岛等），上午8:30出发，下午4:00返回。还有免费浮床玩具和玻璃船。<br><br>
+            <strong>考证：</strong>PADI 5星潜水中心，OW考证4天3晚约¥2,000含吃住。<br><br>
+            <strong>不足：</strong>离镇近海水不够清澈，餐厅菜式较固定，房间简洁不奢华。
+          </div>
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px;">
+            <a href="https://m.ctrip.com/html5/hotel/hoteldetail/125366561.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:var(--gradient);color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">📱 携程预订</a>
+            <a href="https://mp.divepai.com/index/product/detail/id/10020347.html" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:#1e293b;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">🤿 潜派旅行</a>
+            <a href="https://blog.divepai.com/2019/05/17/7512/" target="_blank" style="display:inline-flex;align-items:center;gap:4px;background:#0066ff;color:#fff;padding:8px 16px;border-radius:8px;text-decoration:none;font-size:0.85rem;font-weight:600;">📖 体验评测</a>
+          </div>
+          <div style="color:var(--text-muted);font-size:0.8rem;">💡 价格约¥1,400/人/2晚（全含）· 提前1-2个月预订即可</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 我的推荐 -->
+    <div style="background:linear-gradient(135deg,#fef3c7,#fde68a);border-radius:var(--radius);padding:24px;border-left:4px solid var(--accent);">
+      <div style="font-weight:900;font-size:1.1rem;margin-bottom:8px;">💡 我的推荐</div>
+      <div style="font-size:0.9rem;line-height:1.8;">
+        <strong>预算优先选新佳马达</strong>：¥2,800/2人即可体验水屋生活，且含每日跳岛非常超值。虽然海水不如卡帕莱透明，但水屋体验是完整的（日出日落、海上阳台、浮潜），而且每天跳岛能去到水质更好的远岛。<br><br>
+        <strong>体验优先选卡帕莱</strong>：如果预算允许（多花约¥3,600），卡帕莱的海水质量、房间品质、拍照效果都是碾压级的。但需要提前很久预订，4月出行的话现在（3月底）可能已经订不到了。<br><br>
+        <strong>建议</strong>：先查卡帕莱4月17-18日是否有房，有房就订卡帕莱；没房就选新佳马达，体验依然很棒，省下的钱可以多吃几顿海鲜大餐 🦀
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET -->
+<section id="budget" class="budget-section">
+  <div class="container">
+    <div class="section-title">💰 预算<span>明细</span></div>
+    <div class="section-sub">根据选择的版本自动更新 · 所有价格仅供参考</div>
+
+    <div class="budget-version active" id="budgetA">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:var(--gradient);color:#fff;padding:8px 20px;border-radius:20px;margin-bottom:24px;font-weight:700">
+        🏠 版本A · 水屋版 · 2人合计
+      </div>
+      <div class="budget-table-wrap">
+        <table>
+          <thead><tr><th>项目</th><th>费用</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>国际机票往返</td><td>¥4,646</td><td>去程¥1,865 + 回程¥2,781</td></tr>
+            <tr><td>内段机票</td><td>¥368</td><td>亚庇→斗湖</td></tr>
+            <tr><td>亚庇住宿（3晚）</td><td>¥1,200–1,500</td><td>市中心四星酒店 ¥400-500/晚</td></tr>
+            <tr><td>仙本那镇住宿（2晚）</td><td>¥500–600</td><td>¥250-300/晚</td></tr>
+            <tr><td>水屋住宿（2晚）</td><td>¥2,800–6,400</td><td>新佳马达¥2,800 / 卡帕莱¥6,400</td></tr>
+            <tr><td>跳岛活动（3天）</td><td>¥1,200</td><td>约¥289/人/天 × 2人</td></tr>
+            <tr><td>环滩岛一日游</td><td>¥800–1,000</td><td>约¥400-500/人</td></tr>
+            <tr><td>红树林萤火虫</td><td>¥400–600</td><td>约¥200-300/人</td></tr>
+            <tr><td>餐饮（9天）</td><td>¥2,500–3,500</td><td>人均¥150-200/天（水屋含餐）</td></tr>
+            <tr><td>当地交通</td><td>¥500–800</td><td>打车、包车、拼车等</td></tr>
+            <tr><td>签证/保险/SIM卡/杂费</td><td>¥500–800</td><td>保险约¥200，SIM卡约¥100</td></tr>
+            <tr class="total-row"><td>🎯 总计</td><td>¥15,500–21,500</td><td>新佳马达版约¥16,000，卡帕莱版约¥20,000</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="budget-summary">
+        <div class="budget-card"><div class="amount">¥16,000</div><div class="label">新佳马达版 · 2人</div></div>
+        <div class="budget-card"><div class="amount" style="color:var(--accent)">¥20,000</div><div class="label">卡帕莱版 · 2人</div></div>
+        <div class="budget-card"><div class="amount">¥8,000</div><div class="label">人均（新佳马达）</div></div>
+        <div class="budget-card"><div class="amount" style="color:var(--accent)">¥10,000</div><div class="label">人均（卡帕莱）</div></div>
+      </div>
+    </div>
+
+    <div class="budget-version" id="budgetB">
+      <div style="display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#059669,#047857);color:#fff;padding:8px 20px;border-radius:20px;margin-bottom:24px;font-weight:700">
+        💰 版本B · 经济版 · 2人合计
+      </div>
+      <div class="budget-table-wrap">
+        <table>
+          <thead><tr><th>项目</th><th>费用</th><th>备注</th></tr></thead>
+          <tbody>
+            <tr><td>国际机票往返</td><td>¥4,646</td><td>去程¥1,865 + 回程¥2,781</td></tr>
+            <tr><td>内段机票</td><td>¥368</td><td>亚庇→斗湖</td></tr>
+            <tr><td>亚庇住宿（3晚）</td><td>¥1,200–1,500</td><td>市中心四星酒店 ¥400-500/晚</td></tr>
+            <tr><td>仙本那镇住宿（4晚）</td><td>¥1,000–1,200</td><td>¥250-300/晚</td></tr>
+            <tr><td>跳岛活动（3天）</td><td>¥1,750</td><td>约¥289/人/天 × 2人 × 3天</td></tr>
+            <tr><td>环滩岛一日游</td><td>¥800–1,000</td><td>约¥400-500/人</td></tr>
+            <tr><td>红树林萤火虫</td><td>¥400–600</td><td>约¥200-300/人</td></tr>
+            <tr><td>餐饮（9天）</td><td>¥3,000–4,000</td><td>人均¥170-220/天</td></tr>
+            <tr><td>当地交通</td><td>¥500–800</td><td>同上</td></tr>
+            <tr><td>签证/保险/SIM卡/杂费</td><td>¥500–800</td><td>保险约¥200，SIM卡约¥100</td></tr>
+            <tr class="total-row"><td>🎯 总计</td><td>¥14,200–16,500</td><td></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="budget-summary">
+        <div class="budget-card"><div class="amount" style="color:var(--secondary)">¥14,200</div><div class="label">最低估算 · 2人</div></div>
+        <div class="budget-card"><div class="amount">¥16,500</div><div class="label">最高估算 · 2人</div></div>
+        <div class="budget-card"><div class="amount" style="color:var(--secondary)">¥7,100</div><div class="label">人均最低</div></div>
+        <div class="budget-card"><div class="amount">¥8,250</div><div class="label">人均最高</div></div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- FOOD -->
+<section id="food">
+  <div class="container">
+    <div class="section-title">🍽️ 美食<span>Top 10</span></div>
+    <div class="section-sub">沙巴必吃清单，从早餐到海鲜大排档一网打尽</div>
+    <div class="food-grid">
+      <div class="food-card">
+        <div class="food-rank">🥇</div>
+        <div class="food-name">佑记肉骨茶</div>
+        <div class="food-loc">📍 亚庇加雅街</div>
+        <div class="food-dish">"沙巴第一汤"，早餐首选，猪骨炖煮香浓</div>
+        <div class="food-price">人均 ~30 马币</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">🥈</div>
+        <div class="food-name">肥妈海鲜楼</div>
+        <div class="food-loc">📍 仙本那</div>
+        <div class="food-dish">华人老板娘主理，咸蛋黄蟹膏、奶油老虎虾绝绝子</div>
+        <div class="food-price">人均 60-80 马币</div>
+        <div class="food-warn">⚠️ 需提前占位！17:00去</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">🥉</div>
+        <div class="food-name">大茄来海鲜</div>
+        <div class="food-loc">📍 亚庇</div>
+        <div class="food-dish">人均100马币吃到撑，奶油老虎虾是镇店之宝</div>
+        <div class="food-price">人均 ~100 马币</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">4️⃣</div>
+        <div class="food-name">怡丰茶室</div>
+        <div class="food-loc">📍 亚庇加雅街</div>
+        <div class="food-dish">叻沙每桌必点，牛杂米线也是经典</div>
+        <div class="food-price">人均 ~15 马币</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">5️⃣</div>
+        <div class="food-name">海景海鲜楼</div>
+        <div class="food-loc">📍 仙本那</div>
+        <div class="food-dish">湿奶油老虎虾、蛋黄蟹、拉沙海鲜面</div>
+        <div class="food-price">人均 ~60 马币</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">6️⃣</div>
+        <div class="food-name">家香生肉面</div>
+        <div class="food-loc">📍 亚庇</div>
+        <div class="food-dish">1982年创建，"亚庇第一家生肉面"</div>
+        <div class="food-price">人均 ~12 马币</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">7️⃣</div>
+        <div class="food-name">富源茶室</div>
+        <div class="food-loc">📍 亚庇加雅街</div>
+        <div class="food-dish">咖椰吐司封神，游客造访率最高</div>
+        <div class="food-price">人均 ~10 马币</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">8️⃣</div>
+        <div class="food-name">天旺海鲜楼</div>
+        <div class="food-loc">📍 仙本那码头</div>
+        <div class="food-dish">广东大姐经营，咸蛋皇虾是招牌</div>
+        <div class="food-price">人均 ~50 马币</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">9️⃣</div>
+        <div class="food-name">海鲜市场自购加工</div>
+        <div class="food-loc">📍 仙本那码头附近</div>
+        <div class="food-dish">晚8点后可按3折砍价！买好拿到附近餐厅加工</div>
+        <div class="food-price">丰俭由人 · 加工费5马币/公斤</div>
+      </div>
+      <div class="food-card">
+        <div class="food-rank">🔟</div>
+        <div class="food-name">榴莲街夜市</div>
+        <div class="food-loc">📍 亚庇加雅街附近</div>
+        <div class="food-dish">各种热带水果+小吃，夜市氛围满满</div>
+        <div class="food-price">按量计费</div>
+        <div class="food-warn">⚠️ 榴莲旺季5-8月，4月品种较少</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHOTO SPOTS -->
+<section id="photo" style="background: linear-gradient(135deg, #f0f9ff 0%, #fef9c3 50%, #d1fae5 100%);">
+  <div class="container">
+    <div class="section-title">📸 拍照<span>打卡地</span></div>
+    <div class="section-sub">8大绝美拍照圣地，附最佳时间和拍摄技巧</div>
+    <div class="photo-grid">
+      <div class="photo-card">
+        <div class="photo-icon">🌅</div>
+        <div class="photo-info">
+          <div class="photo-name">丹绒亚路日落</div>
+          <div class="photo-time">⏰ 最佳时间：17:30–18:30</div>
+          <div class="photo-tip">世界前三日落，面朝大海金光洒落。提前到达占位，会堵车！</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-icon">🕌</div>
+        <div class="photo-info">
+          <div class="photo-name">水上清真寺</div>
+          <div class="photo-time">⏰ 最佳时间：07:00–08:00</div>
+          <div class="photo-tip">湖面倒影如梦，清晨无风时倒影最完整。穿长裤长袖入内。</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-icon">⛰️</div>
+        <div class="photo-info">
+          <div class="photo-name">珍珠岛山顶</div>
+          <div class="photo-time">⏰ 最佳时间：10:00–14:00晴天</div>
+          <div class="photo-tip">俯瞰敦沙卡兰全景，震撼！穿运动鞋，爬山约45分钟。</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-icon">🌊</div>
+        <div class="photo-info">
+          <div class="photo-name">仙本那玻璃海</div>
+          <div class="photo-time">⏰ 全天均可</div>
+          <div class="photo-tip">军舰岛和曼达布安的透明奶蓝色海水。防水手机壳必备！</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-icon">🏘️</div>
+        <div class="photo-info">
+          <div class="photo-name">巴瑶族水上村</div>
+          <div class="photo-time">⏰ 最佳时间：上午</div>
+          <div class="photo-tip">海上吉普赛人的水上人家，独特人文景观。带些糖果零食给孩子们。</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-icon">🏝️</div>
+        <div class="photo-info">
+          <div class="photo-name">环滩岛白沙滩</div>
+          <div class="photo-time">⏰ 最佳时间：上午光线好</div>
+          <div class="photo-tip">私人海岛无人打扰，穿浅色衣服更上镜，沙滩白得发光。</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-icon">🕍</div>
+        <div class="photo-info">
+          <div class="photo-name">粉红清真寺</div>
+          <div class="photo-time">⏰ 最佳时间：上午</div>
+          <div class="photo-tip">粉红色建筑 + 蓝天配色绝美。⚠️周五不开放，提前确认！</div>
+        </div>
+      </div>
+      <div class="photo-card">
+        <div class="photo-icon">🏠</div>
+        <div class="photo-info">
+          <div class="photo-name">水屋阳台（版本A）</div>
+          <div class="photo-time">⏰ 日出日落时最美</div>
+          <div class="photo-tip">脚下就是大海！带三脚架拍延时视频，绝对是朋友圈顶流。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PACKING -->
+<section id="packing">
+  <div class="container">
+    <div class="section-title">🎒 行李<span>清单</span></div>
+    <div class="section-sub">4月沙巴：温度23-32°C，紫外线强，偶有阵雨</div>
+    <div style="background:var(--gradient);color:#fff;border-radius:var(--radius);padding:20px 28px;margin-bottom:28px;display:flex;flex-wrap:wrap;gap:24px">
+      <div><div style="font-size:0.8rem;opacity:0.8">气温</div><div style="font-weight:700">23–32°C</div></div>
+      <div><div style="font-size:0.8rem;opacity:0.8">海水温度</div><div style="font-weight:700">27–29°C</div></div>
+      <div><div style="font-size:0.8rem;opacity:0.8">日落时间</div><div style="font-weight:700">约18:00</div></div>
+      <div><div style="font-size:0.8rem;opacity:0.8">降雨</div><div style="font-weight:700">阵雨，来快去快</div></div>
+      <div><div style="font-size:0.8rem;opacity:0.8">台风</div><div style="font-weight:700">无（风下之乡）</div></div>
+    </div>
+    <div class="packing-grid">
+      <div class="packing-card">
+        <div class="packing-cat">👕 衣物</div>
+        <div class="packing-item">夏装为主（短袖短裤裙子）</div>
+        <div class="packing-item">泳衣至少2套</div>
+        <div class="packing-item">长裤长袖1套（参观清真寺）</div>
+      </div>
+      <div class="packing-card">
+        <div class="packing-cat">☀️ 防晒</div>
+        <div class="packing-item">防晒霜 SPF50+（必须！多带几支）</div>
+        <div class="packing-item">防晒衣</div>
+        <div class="packing-item">遮阳帽</div>
+        <div class="packing-item">墨镜</div>
+      </div>
+      <div class="packing-card">
+        <div class="packing-cat">👟 鞋子</div>
+        <div class="packing-item">运动鞋（爬珍珠岛必备）</div>
+        <div class="packing-item">沙滩鞋/溯溪鞋（碎珊瑚多）</div>
+      </div>
+      <div class="packing-card">
+        <div class="packing-cat">🌊 水上装备</div>
+        <div class="packing-item">防水手机壳（必备！）</div>
+        <div class="packing-item">浮潜咬嘴（自带更卫生）</div>
+        <div class="packing-item">水母衣（可选）</div>
+        <div class="packing-item">折叠伞或轻便雨衣</div>
+      </div>
+      <div class="packing-card">
+        <div class="packing-cat">💊 药品</div>
+        <div class="packing-item">晕船药（重要！提前吃）</div>
+        <div class="packing-item">肠胃药</div>
+        <div class="packing-item">创可贴</div>
+        <div class="packing-item">驱蚊液</div>
+      </div>
+      <div class="packing-card">
+        <div class="packing-cat">🔌 其他</div>
+        <div class="packing-item">转换插头（英标三脚）</div>
+        <div class="packing-item">充电宝</div>
+        <div class="packing-item">当地SIM卡（到机场买）</div>
+        <div class="packing-item">马币现金（仙本那部分不刷卡）</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips" style="background: linear-gradient(135deg, #ecfdf5 0%, #e0f9ff 100%);">
+  <div class="container">
+    <div class="section-title">💡 实用<span>贴士</span></div>
+    <div class="section-sub">出发前必读，让旅程更顺畅</div>
+    <div class="tips-grid">
+      <div class="tip-card">
+        <div class="tip-icon">📱</div>
+        <div class="tip-text"><strong>免签入境</strong><span>中国公民免签！出发前3天在线填写MDAC入境卡，无需提前申请签证。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💰</div>
+        <div class="tip-text"><strong>货币兑换</strong><span>1马币≈1.6人民币，仙本那部分地方不能刷卡，建议换些马币现金。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🕐</div>
+        <div class="tip-text"><strong>无时差</strong><span>马来西亚UTC+8，与中国同时区，无需适应时差，轻松出行。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🗣️</div>
+        <div class="tip-text"><strong>语言无障碍</strong><span>沙巴华人众多，中文沟通基本无障碍，餐厅、导游大多会说中文。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📶</div>
+        <div class="tip-text"><strong>通讯网络</strong><span>机场买Celcom/Digi电话卡，约30-50马币，流量充足，信号良好。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔌</div>
+        <div class="tip-text"><strong>电源插座</strong><span>英标三脚插座，记得带转换插头，充电宝也要带，岛上没有插座。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">💊</div>
+        <div class="tip-text"><strong>晕船必备</strong><span>去环滩岛等远岛务必提前服用晕船药，在船上不舒服会大大影响体验。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔐</div>
+        <div class="tip-text"><strong>安全提示</strong><span>仙本那部分海域有安全隐患，务必选择正规旅行社报团，不要单独下海。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🧴</div>
+        <div class="tip-text"><strong>防晒重中之重</strong><span>仙本那紫外线极高，每2小时补涂一次！防晒霜多带几支，宁多勿少。</span></div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🎒</div>
+        <div class="tip-text"><strong>亚航行李</strong><span>手提限重7KG，托运在淘宝提前购买比现场便宜很多，出发前记得买好。</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>🌊 沙巴海岛之旅 · 9天深度游攻略</p>
+  <p>机票数据来源：<a href="https://www.kiwi.com" style="color:rgba(255,255,255,0.7)">Kiwi.com</a> · 价格以实际预订为准，随时间波动</p>
+  <p style="margin-top:12px;opacity:0.6">所有价格仅供参考 · 出行前请确认最新签证政策和安全状况 · 祝旅途愉快 🐠</p>
+</footer>
+
+<script>
+// ── Version switching ──
+let currentVersion = 'A';
+
+function setVersion(v) {
+  currentVersion = v;
+  document.getElementById('btnA').classList.toggle('active', v === 'A');
+  document.getElementById('btnB').classList.toggle('active', v === 'B');
+
+  // Budget tables
+  document.getElementById('budgetA').classList.toggle('active', v === 'A');
+  document.getElementById('budgetB').classList.toggle('active', v === 'B');
+
+  // Day 7 & 8 version content
+  ['day7content', 'day8content'].forEach(id => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.className = 'version-content ' + (v === 'A' ? 'show-a' : 'show-b');
+    }
+  });
+
+  // Day 7 titles
+  const d7t = document.getElementById('day7title');
+  const d7s = document.getElementById('day7sub');
+  if (v === 'A') {
+    d7t.textContent = '仙本那 · 水屋入住';
+    d7s.textContent = '入住东南亚最美水屋，脚下就是大海';
+  } else {
+    d7t.textContent = '仙本那 · 马布岛&卡帕莱';
+    d7s.textContent = '世界顶级漫潜，近距离接触海龟';
+  }
+
+  // Day 8 titles
+  const d8t = document.getElementById('day8title');
+  const d8s = document.getElementById('day8sub');
+  if (v === 'A') {
+    d8t.textContent = '仙本那 · 水屋第二天';
+    d8s.textContent = '悠闲享受，水屋阳台看海上日出';
+  } else {
+    d8t.textContent = '仙本那 · 休息&自由活动';
+    d8s.textContent = '连续跳岛后的悠闲休息日';
+  }
+}
+
+// Initialize version content
+setVersion('A');
+
+// ── Day accordion ──
+function toggleDay(id) {
+  const card = document.getElementById(id);
+  card.classList.toggle('open');
+}
+
+// Open day1 by default
+document.getElementById('day1').classList.add('open');
+
+// ── Smooth scroll offset for fixed nav ──
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      const offset = 110;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+</body>
+</html>
