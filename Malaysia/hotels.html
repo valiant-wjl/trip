@@ -1,0 +1,884 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏨 沙巴酒店攻略 · 版本B 经济版</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0891b2;
+  --primary-dark: #0e7490;
+  --primary-light: #67e8f9;
+  --secondary: #059669;
+  --accent: #f59e0b;
+  --accent-light: #fcd34d;
+  --bg: #f0f9ff;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e0f2fe;
+  --shadow: 0 4px 24px rgba(8,145,178,0.10);
+  --shadow-hover: 0 8px 32px rgba(8,145,178,0.18);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --gradient: linear-gradient(135deg, #0891b2 0%, #059669 50%, #0e7490 100%);
+  --gradient-light: linear-gradient(135deg, #e0f9ff 0%, #d1fae5 100%);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(8,145,178,0.08);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+}
+.nav-logo { font-weight: 700; color: var(--primary); font-size: 1.05rem; white-space: nowrap; }
+.nav-links {
+  display: flex; gap: 4px; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none; font-size: 0.82rem;
+  padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+  transition: all 0.2s;
+}
+.nav-links a:hover { background: var(--gradient-light); color: var(--primary); }
+.nav-links a.back-link {
+  color: var(--primary); font-weight: 600;
+  border: 1.5px solid var(--primary); border-radius: 16px;
+  padding: 4px 14px;
+}
+.nav-links a.back-link:hover { background: var(--primary); color: #fff; }
+
+/* HERO */
+.hero {
+  min-height: 60vh;
+  background: var(--gradient);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 24px 60px;
+  position: relative; overflow: hidden;
+}
+.hero-title {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 900; color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  line-height: 1.2; margin-bottom: 12px;
+}
+.hero-sub {
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.9); margin-bottom: 24px;
+}
+.hero-badges {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.hero-badge {
+  background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; padding: 6px 16px; border-radius: 20px;
+  font-size: 0.85rem; font-weight: 500;
+}
+.wave { position: absolute; bottom: 0; left: 0; right: 0; }
+
+/* SECTION */
+section { padding: 60px 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 800;
+  color: var(--text); margin-bottom: 6px;
+}
+.section-title span { color: var(--primary); }
+.section-sub { color: var(--text-muted); margin-bottom: 32px; font-size: 0.92rem; }
+
+/* PLATFORM CARDS */
+.platform-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 16px; margin-bottom: 20px;
+}
+.platform-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 24px; border-top: 4px solid var(--primary);
+  transition: box-shadow 0.25s, transform 0.25s;
+  display: flex; flex-direction: column;
+}
+.platform-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.platform-card.recommended { border-top-color: var(--accent); }
+.platform-icon { font-size: 2rem; margin-bottom: 10px; }
+.platform-name { font-size: 1.1rem; font-weight: 700; margin-bottom: 4px; }
+.platform-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; flex: 1; }
+.platform-tag {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  padding: 3px 10px; border-radius: 12px; margin-bottom: 8px;
+  background: linear-gradient(135deg, #f59e0b, #d97706); color: #fff; align-self: flex-start;
+}
+.platform-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  background: var(--gradient); color: #fff;
+  text-decoration: none; padding: 8px 16px; border-radius: 10px;
+  font-size: 0.82rem; font-weight: 600; transition: opacity 0.2s;
+  align-self: flex-start;
+}
+.platform-link:hover { opacity: 0.85; }
+
+/* HOTEL CARDS */
+.hotel-grid { display: flex; flex-direction: column; gap: 20px; }
+.hotel-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden; transition: box-shadow 0.25s, transform 0.25s;
+}
+.hotel-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.hotel-card.top-pick { border-left: 5px solid var(--accent); }
+.hotel-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 24px 28px 0; flex-wrap: wrap; gap: 12px;
+}
+.hotel-name-area { flex: 1; min-width: 200px; }
+.hotel-name { font-size: 1.2rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.hotel-name-en { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px; }
+.hotel-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.hotel-tag {
+  font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 10px;
+  background: var(--gradient-light); color: var(--primary);
+}
+.hotel-tag.star { background: linear-gradient(135deg, #fcd34d, #f59e0b); color: #92400e; }
+.hotel-tag.pick { background: var(--gradient); color: #fff; }
+.hotel-price-area { text-align: right; min-width: 120px; }
+.hotel-price { font-size: 1.6rem; font-weight: 900; color: var(--primary); }
+.hotel-price-unit { font-size: 0.78rem; color: var(--text-muted); }
+.hotel-body { padding: 16px 28px 24px; }
+.hotel-info-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 12px; margin-bottom: 16px;
+}
+.hotel-info-item { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; }
+.hotel-info-icon { font-size: 1.1rem; flex-shrink: 0; }
+.hotel-info-label { color: var(--text-muted); font-size: 0.78rem; }
+.hotel-info-value { font-weight: 500; }
+.hotel-desc {
+  font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;
+  margin-bottom: 16px; padding: 12px 16px;
+  background: var(--gradient-light); border-radius: var(--radius-sm);
+}
+.hotel-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.hotel-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 8px 16px; border-radius: 10px;
+  text-decoration: none; font-size: 0.82rem; font-weight: 600;
+  transition: all 0.2s;
+}
+.hotel-link.primary { background: var(--gradient); color: #fff; }
+.hotel-link.primary:hover { opacity: 0.85; }
+.hotel-link.secondary {
+  background: transparent; color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+.hotel-link.secondary:hover { background: var(--primary); color: #fff; }
+
+/* SCORE */
+.hotel-score {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--gradient); color: #fff;
+  padding: 4px 12px; border-radius: 10px;
+  font-weight: 800; font-size: 0.95rem;
+}
+.hotel-score small { font-weight: 400; font-size: 0.72rem; opacity: 0.9; }
+
+/* SUMMARY TABLE */
+.summary-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  border-radius: var(--radius); overflow: hidden;
+  box-shadow: var(--shadow);
+}
+.summary-table thead { background: var(--gradient); }
+.summary-table th {
+  color: #fff; padding: 14px 16px; font-size: 0.85rem;
+  font-weight: 700; text-align: left;
+}
+.summary-table td {
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+  font-size: 0.88rem; background: var(--card-bg);
+}
+.summary-table tbody tr:last-child td { border-bottom: none; }
+.summary-table tbody tr:hover td { background: var(--gradient-light); }
+.summary-table .total td {
+  font-weight: 800; font-size: 1rem;
+  background: #f0fdf4; color: var(--secondary);
+}
+
+/* TIP BOX */
+.tip-box {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-radius: var(--radius-sm); padding: 16px 20px;
+  font-size: 0.88rem; line-height: 1.8;
+  margin-top: 24px; border-left: 4px solid var(--accent);
+}
+.tip-box strong { color: #92400e; }
+
+/* CITY DIVIDER */
+.city-divider {
+  display: flex; align-items: center; gap: 16px;
+  margin: 40px 0 24px; padding: 16px 24px;
+  background: var(--gradient); border-radius: var(--radius);
+  color: #fff;
+}
+.city-divider .icon { font-size: 2.2rem; }
+.city-divider .info h3 { font-size: 1.3rem; font-weight: 800; }
+.city-divider .info p { font-size: 0.88rem; opacity: 0.9; }
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 40px 24px;
+  color: var(--text-muted); font-size: 0.82rem;
+}
+footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+footer a:hover { text-decoration: underline; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .hotel-header { flex-direction: column; }
+  .hotel-price-area { text-align: left; }
+  .platform-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">🏨 酒店攻略</div>
+    <div class="nav-links">
+      <a href="travel-plan.html" class="back-link">← 返回行程</a>
+      <a href="#platforms">订房平台</a>
+      <a href="#kk-hotels">亚庇酒店</a>
+      <a href="#semporna-hotels">仙本那酒店</a>
+      <a href="#summary">费用总览</a>
+      <a href="#tips">订房贴士</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-title">🏨 沙巴酒店攻略</div>
+  <div class="hero-sub">版本B · 经济版 · 不住水屋方案</div>
+  <div class="hero-badges">
+    <span class="hero-badge">📅 2026.4.11 - 4.19</span>
+    <span class="hero-badge">🏨 亚庇3晚 + 仙本那4晚</span>
+    <span class="hero-badge">💰 总计 ¥2,200 - 2,700</span>
+    <span class="hero-badge">👫 2人出行</span>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 80" fill="none"><path d="M0 40 C360 80 720 0 1080 40 C1260 60 1380 40 1440 40 V80 H0Z" fill="#f0f9ff"/></svg>
+</section>
+
+<!-- BOOKING PLATFORMS -->
+<section id="platforms">
+  <div class="container">
+    <h2 class="section-title">📱 <span>订房平台</span>对比</h2>
+    <p class="section-sub">东南亚酒店建议多平台比价，同一酒店价差可达 20-30%</p>
+
+    <div class="platform-grid">
+      <div class="platform-card recommended">
+        <span class="platform-tag">🏆 东南亚首选</span>
+        <div class="platform-icon">🟠</div>
+        <div class="platform-name">Agoda</div>
+        <div class="platform-desc">东南亚酒店覆盖最全，马来西亚本土小酒店选择多，价格通常最低。支持中文，常有闪促和会员折扣。</div>
+        <a href="https://www.agoda.com/zh-cn/" target="_blank" class="platform-link">前往 Agoda →</a>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-icon">🔵</div>
+        <div class="platform-name">Booking.com</div>
+        <div class="platform-desc">免费取消政策优秀，支持到店付款。评价体系靠谱，适合行程可能变动的情况。Genius 会员有额外折扣。</div>
+        <a href="https://www.booking.com/" target="_blank" class="platform-link">前往 Booking →</a>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-icon">🟡</div>
+        <div class="platform-name">携程 / Trip.com</div>
+        <div class="platform-desc">中文客服响应快，偶有机酒套餐优惠。亚庇大酒店有时比 Agoda 便宜，支持支付宝/微信支付。</div>
+        <a href="https://www.ctrip.com/" target="_blank" class="platform-link">前往携程 →</a>
+      </div>
+
+      <div class="platform-card">
+        <div class="platform-icon">🟢</div>
+        <div class="platform-name">Klook</div>
+        <div class="platform-desc">酒店+活动套餐划算，跳岛游/红树林等活动也能一起订。偶尔有独家优惠码。</div>
+        <a href="https://www.klook.com/" target="_blank" class="platform-link">前往 Klook →</a>
+      </div>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 比价技巧：</strong>先在 Agoda 搜到心仪酒店，再去 Booking 和携程对比同日期价格。注意区分「含税价」和「不含税价」——马来西亚有 10% 服务税 + 旅游税（10 MYR/晚/房）。
+    </div>
+  </div>
+</section>
+
+<!-- KOTA KINABALU HOTELS -->
+<section id="kk-hotels">
+  <div class="container">
+    <div class="city-divider">
+      <div class="icon">🌅</div>
+      <div class="info">
+        <h3>亚庇 Kota Kinabalu</h3>
+        <p>入住 3 晚（4/11 - 4/14）· 推荐住加雅街附近 · 步行可达美食和码头</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">🏨 亚庇<span>酒店推荐</span></h2>
+    <p class="section-sub">加雅街（Gaya Street）500m 范围内，步行到佑记肉骨茶、怡丰茶室、码头均 5-10 分钟</p>
+
+    <div class="hotel-grid">
+
+      <!-- Hotel 1: Hyatt Centric -->
+      <div class="hotel-card top-pick">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">凯悦尚萃酒店</div>
+            <div class="hotel-name-en">Hyatt Centric Kota Kinabalu</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag pick">⭐ 首推</span>
+              <span class="hotel-tag star">★★★★★</span>
+              <span class="hotel-tag">2023年新开</span>
+              <span class="hotel-tag">马来西亚首家</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥430-600</div>
+            <div class="hotel-price-unit">/晚 · 约 US$87 起</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">Jesselton Quay 旁，距加雅街 600m</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⭐</span>
+              <div><div class="hotel-info-label">评分</div><div class="hotel-info-value">TripAdvisor 4.0/5（467 条评价）· 亚庇 #7</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏊</span>
+              <div><div class="hotel-info-label">设施</div><div class="hotel-info-value">23楼无边泳池 · 可看神山和海景</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🛏️</span>
+              <div><div class="hotel-info-label">房间</div><div class="hotel-info-value">222间客房 · 带阳台 · 雨淋花洒</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            马来西亚第一家凯悦尚萃酒店，2023 年开业，设施全新。23 楼无边泳池一侧看海、一侧看神山，拍照绝佳。步行到 Jesselton Quay 码头仅几分钟，出海跳岛非常方便。房间设计融入沙巴自然元素，带步入式雨淋花洒和阳台。
+          </div>
+          <div class="hotel-links">
+            <a href="https://www.agoda.com/hotel-grandis/hotel/kota-kinabalu-my.html" target="_blank" class="hotel-link primary">Agoda 预订</a>
+            <a href="https://www.booking.com/hotel/my/hyatt-centric-kota-kinabalu.html" target="_blank" class="hotel-link secondary">Booking</a>
+            <a href="https://www.hyatt.com/hyatt-centric/en-US/bkict-hyatt-centric-kota-kinabalu" target="_blank" class="hotel-link secondary">官网</a>
+            <a href="https://www.tripadvisor.com/Hotel_Review-g298307-d24138747-Reviews-Hyatt_Centric_Kota_Kinabalu.html" target="_blank" class="hotel-link secondary">TripAdvisor</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 2: Grandis -->
+      <div class="hotel-card top-pick">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">格兰迪斯酒店</div>
+            <div class="hotel-name-en">Grandis Hotels and Resorts</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag pick">⭐ 推荐</span>
+              <span class="hotel-tag star">★★★★★</span>
+              <span class="hotel-tag">Suria 商场直通</span>
+              <span class="hotel-tag">有泳池</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥350-500</div>
+            <div class="hotel-price-unit">/晚 · 约 US$52 起</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">Suria Sabah 商场旁，距机场 15 分钟</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⭐</span>
+              <div><div class="hotel-info-label">评分</div><div class="hotel-info-value">TripAdvisor 4.0/5 · 亚庇 #17</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏊</span>
+              <div><div class="hotel-info-label">设施</div><div class="hotel-info-value">室外泳池 · Sky Blu 天台酒吧 · 3 间餐厅</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🛏️</span>
+              <div><div class="hotel-info-label">房间</div><div class="hotel-info-value">188间 · 城景/海景 · 现代风格</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            酒店命名源于沙巴稀有兰花 Ascidieria Grandis，直通 Suria Sabah 购物中心，下雨天也能逛街购物。顶楼 Sky Blu Bar 可看日落，Rosea Caf&eacute; 全日供餐。4 月属低价季节，性价比极高。
+          </div>
+          <div class="hotel-links">
+            <a href="https://www.agoda.com/hotel-grandis/hotel/kota-kinabalu-my.html" target="_blank" class="hotel-link primary">Agoda 预订</a>
+            <a href="https://www.expedia.com/Kota-Kinabalu-Hotels-Grandis-Hotel.h7055088.Hotel-Information" target="_blank" class="hotel-link secondary">Expedia</a>
+            <a href="https://www.hotelgrandis.com/" target="_blank" class="hotel-link secondary">官网</a>
+            <a href="https://www.tripadvisor.com/Hotel_Review-g298307-d5588480-Reviews-Hotel_Grandis.html" target="_blank" class="hotel-link secondary">TripAdvisor</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 3: Jesselton Hotel -->
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">哲斯顿酒店</div>
+            <div class="hotel-name-en">The Jesselton Hotel</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag star">★★★★</span>
+              <span class="hotel-tag">1954年老牌</span>
+              <span class="hotel-tag">加雅街上</span>
+              <span class="hotel-tag">殖民风格</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥250-400</div>
+            <div class="hotel-price-unit">/晚 · 约 US$34 起</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">69 Jalan Gaya · 加雅街正中心</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⭐</span>
+              <div><div class="hotel-info-label">评分</div><div class="hotel-info-value">Agoda 8.0+ · 位置评分极高</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏛️</span>
+              <div><div class="hotel-info-label">特色</div><div class="hotel-info-value">1954年开业 · 殖民复古建筑</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🛏️</span>
+              <div><div class="hotel-info-label">房间</div><div class="hotel-info-value">44间 · 经典家具 · 精品酒店</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            亚庇最有历史的酒店，1954 年开业，殖民风格建筑精心修复。就在加雅街上，对面就是佑记肉骨茶，到 Jesselton Quay 码头步行5分钟。44 间精品客房，经典家具搭配现代卫浴。设施略老但位置无敌，喜欢复古风的首选。
+          </div>
+          <div class="hotel-links">
+            <a href="https://www.agoda.com/the-jesselton-hotel/hotel/kota-kinabalu-my.html" target="_blank" class="hotel-link primary">Agoda 预订</a>
+            <a href="https://www.expedia.com/Kota-Kinabalu-Hotels-The-Jesselton-Hotel.h5358716.Hotel-Information" target="_blank" class="hotel-link secondary">Expedia</a>
+            <a href="https://www.jesseltonhotel.com/" target="_blank" class="hotel-link secondary">官网</a>
+            <a href="https://www.klook.com/en-MY/hotels/detail/254545-the-jesselton-hotel/" target="_blank" class="hotel-link secondary">Klook</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 4: Dreamtel -->
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">追梦酒店</div>
+            <div class="hotel-name-en">Dreamtel Kota Kinabalu</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag star">★★★</span>
+              <span class="hotel-tag">高性价比</span>
+              <span class="hotel-tag">中文友好</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥150-250</div>
+            <div class="hotel-price-unit">/晚 · 约 US$24 起</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">市中心历史区 · 步行可达所有景点</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⭐</span>
+              <div><div class="hotel-info-label">评分</div><div class="hotel-info-value">Agoda 8.4/10（8,414 条）· Booking 8.1</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🚌</span>
+              <div><div class="hotel-info-label">交通</div><div class="hotel-info-value">门口就是车站 · 机场大巴终点站</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🛏️</span>
+              <div><div class="hotel-info-label">房间</div><div class="hotel-info-value">160间 · 有中文标识 · 24h 客房服务</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            预算首选！Agoda 超过 8000 条评价还能保持 8.4 分非常难得。酒店有中文标识，贴心提示。门口就是公交车站和机场大巴终点站，交通极其便利。注意：标准房无窗户，建议升级高级房或豪华房。
+          </div>
+          <div class="hotel-links">
+            <a href="https://www.agoda.com/dreamtel-kota-kinabalu/hotel/kota-kinabalu-my.html" target="_blank" class="hotel-link primary">Agoda 预订</a>
+            <a href="https://www.booking.com/hotel/my/dreamtel-kota-kinabalu.html" target="_blank" class="hotel-link secondary">Booking</a>
+            <a href="https://www.tripadvisor.com/Hotel_Review-g298307-d5511172-Reviews-Dreamtel_Kota_Kinabalu.html" target="_blank" class="hotel-link secondary">TripAdvisor</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SEMPORNA HOTELS -->
+<section id="semporna-hotels" style="background: #f8fafc;">
+  <div class="container">
+    <div class="city-divider" style="background: linear-gradient(135deg, #059669 0%, #047857 100%);">
+      <div class="icon">🐠</div>
+      <div class="info">
+        <h3>仙本那 Semporna</h3>
+        <p>入住 4 晚（4/14 - 4/18）· 推荐住码头/海丰区域 · 跳岛出发最方便</p>
+      </div>
+    </div>
+
+    <h2 class="section-title">🏨 仙本那<span>酒店推荐</span></h2>
+    <p class="section-sub">仙本那镇很小，酒店集中在码头和海丰区域。选码头附近的酒店，跳岛游早上走路就到集合点。</p>
+
+    <div class="hotel-grid">
+
+      <!-- Hotel 1: Seafest -->
+      <div class="hotel-card top-pick">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">海丰大酒店</div>
+            <div class="hotel-name-en">Seafest Hotel Semporna</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag pick">⭐ 首推</span>
+              <span class="hotel-tag star">★★★</span>
+              <span class="hotel-tag">码头旁</span>
+              <span class="hotel-tag">华人老板</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥280-400</div>
+            <div class="hotel-price-unit">/晚 · 约 US$55 起</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">Seafest Township · 码头步行1分钟</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⭐</span>
+              <div><div class="hotel-info-label">评分</div><div class="hotel-info-value">携程 3.6/5（469 条）· KAYAK $55 起</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏊</span>
+              <div><div class="hotel-info-label">设施</div><div class="hotel-info-value">泳池 · Spa · 24h 前台 · 免费停车</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🍽️</span>
+              <div><div class="hotel-info-label">周边</div><div class="hotel-info-value">楼下海鲜市场 · 对面 KFC · 便利店</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            仙本那最知名酒店，华人老板经营（沟通无障碍）。最大优势是位置 —— 码头步行1分钟，跳岛游早起不用赶路。楼下就是海鲜市场，对面有 KFC 和便利店。2001 年开业，设施不算新但干净，中国游客多，安全感强。有三家分店：主楼、Regency 楼和 Lepa Wing，注意预订时确认。
+          </div>
+          <div class="hotel-links">
+            <a href="https://www.agoda.com/zh-cn/seafest-hotel/hotel/semporna-my.html" target="_blank" class="hotel-link primary">Agoda 预订</a>
+            <a href="https://m.ctrip.com/html5/hotel/hoteldetail/1371941.html" target="_blank" class="hotel-link secondary">携程</a>
+            <a href="https://www.klook.com/en-US/hotels/detail/587226-seafest-hotel/" target="_blank" class="hotel-link secondary">Klook</a>
+            <a href="https://www.tripadvisor.com/Hotel_Review-g635753-d1188854-Reviews-Seafest_Hotel-Semporna.html" target="_blank" class="hotel-link secondary">TripAdvisor</a>
+            <a href="https://seafesthotel.com/" target="_blank" class="hotel-link secondary">官网</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 2: Seafest Lepa Wing -->
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">海丰酒店 · 彩船楼</div>
+            <div class="hotel-name-en">Seafest Hotel Lepa Wing</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag star">★★★</span>
+              <span class="hotel-tag">海景房</span>
+              <span class="hotel-tag">有阳台</span>
+              <span class="hotel-tag">较新</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥350-500</div>
+            <div class="hotel-price-unit">/晚 · 约 US$78 起</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">海丰酒店新楼 · 同一区域</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⭐</span>
+              <div><div class="hotel-info-label">评分</div><div class="hotel-info-value">Trip.com 6.9/10（202 条评价）</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🌊</span>
+              <div><div class="hotel-info-label">特色</div><div class="hotel-info-value">部分房型有海景阳台</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🛏️</span>
+              <div><div class="hotel-info-label">房间</div><div class="hotel-info-value">比主楼更新 · 房间更大</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            海丰酒店的新翼楼，设施比主楼新，部分房型有小阳台可以看到海景。与主楼共享码头区域优势，楼下连着小型商场有快餐店。适合愿意多花一点预算换更好房间体验的人。注意：预订时看清是 Lepa Wing 还是主楼。
+          </div>
+          <div class="hotel-links">
+            <a href="https://m.ctrip.com/html5/hotel/hoteldetail/36663427.html" target="_blank" class="hotel-link primary">携程预订</a>
+            <a href="https://us.trip.com/hotels/semporna-hotel-detail-36663427/seafest-hotel-lepa-wing/" target="_blank" class="hotel-link secondary">Trip.com</a>
+            <a href="https://www.traveloka.com/en-my/hotel/malaysia/seafest-hotel-lepa-wing-9000000927659" target="_blank" class="hotel-link secondary">Traveloka</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 3: Scuba Tiger -->
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">潜虎度假酒店</div>
+            <div class="hotel-name-en">Scuba Tiger Semporna Holiday Resort</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag star">★★★</span>
+              <span class="hotel-tag">潜水员最爱</span>
+              <span class="hotel-tag">有餐厅酒吧</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥200-300</div>
+            <div class="hotel-price-unit">/晚 · 约 US$44 起</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">Kampung Tampi-Tampi · 码头区域</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">⭐</span>
+              <div><div class="hotel-info-label">评分</div><div class="hotel-info-value">KAYAK $44 起 · 支持免费取消</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🍹</span>
+              <div><div class="hotel-info-label">设施</div><div class="hotel-info-value">餐厅 · 酒吧 · 免费停车 · 快速入住</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🛏️</span>
+              <div><div class="hotel-info-label">房间</div><div class="hotel-info-value">免费洗漱用品 · 客房服务 · WiFi（付费）</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            潜水爱好者聚集地，酒店自带餐厅和酒吧，晚上可以和各国潜水员交流。价格比海丰便宜，设施较新，支持免费取消。WiFi 需额外付费是一个缺点，但仙本那的网络本身也比较慢。
+          </div>
+          <div class="hotel-links">
+            <a href="https://www.agoda.com/scuba-tiger-semporna/hotel/semporna-my.html" target="_blank" class="hotel-link primary">Agoda 预订</a>
+            <a href="https://www.hotels.com/ho478922/scuba-tiger-semporna-holiday-resort-semporna-malaysia/" target="_blank" class="hotel-link secondary">Hotels.com</a>
+            <a href="https://www.kayak.com/Semporna-Hotels-Scuba-Tiger-Semporna-Holiday-Resort.2225025.ksp" target="_blank" class="hotel-link secondary">KAYAK</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel 4: Sipadan Inn -->
+      <div class="hotel-card">
+        <div class="hotel-header">
+          <div class="hotel-name-area">
+            <div class="hotel-name">西巴丹客栈</div>
+            <div class="hotel-name-en">Sipadan Inn</div>
+            <div class="hotel-tags">
+              <span class="hotel-tag star">★★</span>
+              <span class="hotel-tag">最便宜</span>
+              <span class="hotel-tag">3家分店</span>
+              <span class="hotel-tag">海景公寓</span>
+            </div>
+          </div>
+          <div class="hotel-price-area">
+            <div class="hotel-price">¥100-200</div>
+            <div class="hotel-price-unit">/晚 · 预算首选</div>
+          </div>
+        </div>
+        <div class="hotel-body">
+          <div class="hotel-info-grid">
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📍</span>
+              <div><div class="hotel-info-label">位置</div><div class="hotel-info-value">仙本那海滨镇中心 · 码头附近</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🏠</span>
+              <div><div class="hotel-info-label">房型</div><div class="hotel-info-value">标双/家庭/高级/海景公寓 多种选择</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">📶</span>
+              <div><div class="hotel-info-label">设施</div><div class="hotel-info-value">空调 · 有线电视 · 免费 WiFi</div></div>
+            </div>
+            <div class="hotel-info-item">
+              <span class="hotel-info-icon">🗺️</span>
+              <div><div class="hotel-info-label">分店</div><div class="hotel-info-value">Sipadan Inn 1/2/3 · 经济到中等</div></div>
+            </div>
+          </div>
+          <div class="hotel-desc">
+            仙本那老牌经济型住宿，有 3 家分店（1/2/3 号店），从背包客到中档都有覆盖。靠近码头，周围有餐厅、商场和潜水运营商。Sipadan Inn 2 有海景公寓房型，性价比不错。追求极致省钱或潜水员长住的好选择。
+          </div>
+          <div class="hotel-links">
+            <a href="https://www.sipadan.com/Sipadan-Inn.php" target="_blank" class="hotel-link primary">官网预订</a>
+            <a href="https://www.agoda.com/sipadan-inn/hotel/semporna-my.html" target="_blank" class="hotel-link secondary">Agoda</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- SUMMARY -->
+<section id="summary">
+  <div class="container">
+    <h2 class="section-title">💰 <span>住宿费用</span>总览</h2>
+    <p class="section-sub">版本 B 经济版 · 不住水屋 · 2 人合计</p>
+
+    <div style="overflow-x:auto;">
+      <table class="summary-table">
+        <thead>
+          <tr>
+            <th>城市</th>
+            <th>推荐酒店</th>
+            <th>晚数</th>
+            <th>参考单价/晚</th>
+            <th>小计（2人）</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>亚庇</strong></td>
+            <td>Hyatt Centric / Grandis</td>
+            <td>3 晚</td>
+            <td>¥430-600</td>
+            <td>¥1,290-1,800</td>
+          </tr>
+          <tr>
+            <td><strong>亚庇（省钱）</strong></td>
+            <td>Jesselton / Dreamtel</td>
+            <td>3 晚</td>
+            <td>¥150-400</td>
+            <td>¥450-1,200</td>
+          </tr>
+          <tr>
+            <td><strong>仙本那</strong></td>
+            <td>Seafest Hotel 主楼</td>
+            <td>4 晚</td>
+            <td>¥280-400</td>
+            <td>¥1,120-1,600</td>
+          </tr>
+          <tr>
+            <td><strong>仙本那（省钱）</strong></td>
+            <td>Scuba Tiger / Sipadan Inn</td>
+            <td>4 晚</td>
+            <td>¥100-300</td>
+            <td>¥400-1,200</td>
+          </tr>
+          <tr class="total">
+            <td colspan="3">🎯 推荐组合：Hyatt Centric + Seafest</td>
+            <td></td>
+            <td><strong>¥2,410-3,400</strong></td>
+          </tr>
+          <tr class="total">
+            <td colspan="3">💰 省钱组合：Dreamtel + Scuba Tiger</td>
+            <td></td>
+            <td><strong>¥850-1,950</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box" style="margin-top:24px;">
+      <strong>💡 省钱提醒：</strong>以上为房间价格（非人均），2人同住一间房分摊后人均减半。版本B 行程预算中住宿部分为 ¥2,200-2,700（2人合计），选推荐组合完全可以覆盖。
+    </div>
+  </div>
+</section>
+
+<!-- TIPS -->
+<section id="tips" style="background: #f8fafc;">
+  <div class="container">
+    <h2 class="section-title">📝 <span>订房</span>贴士</h2>
+    <p class="section-sub">提前了解这些，避免踩坑</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px;">
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">⏰</div>
+        <div style="font-weight:700;margin-bottom:6px;">提前预订</div>
+        <div style="font-size:0.88rem;color:var(--text-muted);">4 月是旺季前夕，建议<strong>至少提前 1 个月</strong>预订。仙本那酒店选择少，热门的海丰酒店更要提前。亚庇选择多，2-3 周前也来得及。</div>
+      </div>
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">💳</div>
+        <div style="font-weight:700;margin-bottom:6px;">含税 vs 不含税</div>
+        <div style="font-size:0.88rem;color:var(--text-muted);">马来西亚有 <strong>10% 服务税 + 10 MYR/晚旅游税</strong>（约 ¥16）。Agoda 默认显示不含税价，Booking 通常含税。对比时注意统一口径。</div>
+      </div>
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🌙</div>
+        <div style="font-weight:700;margin-bottom:6px;">深夜到达注意</div>
+        <div style="font-size:0.88rem;color:var(--text-muted);">Day 1 航班凌晨 02:05 到亚庇，确认酒店支持<strong>深夜入住（late check-in）</strong>。以上推荐酒店均有 24h 前台，但建议提前告知到达时间。</div>
+      </div>
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🔄</div>
+        <div style="font-weight:700;margin-bottom:6px;">免费取消优先</div>
+        <div style="font-size:0.88rem;color:var(--text-muted);">建议先订 Booking 的免费取消房型锁住价格，然后继续在 Agoda 观望闪促。如果 Agoda 更便宜就取消 Booking 的订单。</div>
+      </div>
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">🏨</div>
+        <div style="font-weight:700;margin-bottom:6px;">海丰酒店分店</div>
+        <div style="font-size:0.88rem;color:var(--text-muted);">Seafest Hotel 有主楼、Regency 楼、Lepa Wing 三栋。预订时<strong>看清具体是哪栋楼</strong>，图片可能不对应。Lepa Wing 更新但稍贵。</div>
+      </div>
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">📱</div>
+        <div style="font-weight:700;margin-bottom:6px;">APP 专属优惠</div>
+        <div style="font-size:0.88rem;color:var(--text-muted);">Agoda 和 Booking 的手机 APP 价格通常比网页版<strong>便宜 5-15%</strong>。首次使用还有新用户折扣码，记得在 APP 上完成预订。</div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:8px;">🌊 沙巴海岛之旅 · 版本B 经济版 · 酒店攻略</p>
+  <p style="margin-bottom:16px;">价格数据更新于 2026 年 3 月 · 实际价格以预订平台为准</p>
+  <p style="margin-bottom:8px;"><a href="travel-plan.html">← 返回完整行程规划</a></p>
+  <p style="font-size:0.75rem;color:var(--text-muted);">
+    在线链接：<a href="https://valiant-wjl.github.io/trip/Malaysia/hotels.html">酒店攻略</a> ·
+    <a href="https://valiant-wjl.github.io/trip/Malaysia/travel-plan.html">行程规划</a>
+  </p>
+</footer>
+
+</body>
+</html>
