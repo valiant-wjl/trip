@@ -1,0 +1,1211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🏝️ 仙本那水屋攻略 · 选岛选房全指南</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root {
+  --primary: #0891b2;
+  --primary-dark: #0e7490;
+  --primary-light: #67e8f9;
+  --secondary: #059669;
+  --accent: #f59e0b;
+  --accent-light: #fcd34d;
+  --bg: #f0f9ff;
+  --card-bg: #ffffff;
+  --text: #1e293b;
+  --text-muted: #64748b;
+  --border: #e0f2fe;
+  --shadow: 0 4px 24px rgba(8,145,178,0.10);
+  --shadow-hover: 0 8px 32px rgba(8,145,178,0.18);
+  --radius: 16px;
+  --radius-sm: 10px;
+  --gradient: linear-gradient(135deg, #0891b2 0%, #059669 50%, #0e7490 100%);
+  --gradient-light: linear-gradient(135deg, #e0f9ff 0%, #d1fae5 100%);
+  --gradient-warm: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  --gradient-sunset: linear-gradient(135deg, #f97316 0%, #ec4899 50%, #8b5cf6 100%);
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 2px 16px rgba(8,145,178,0.08);
+}
+.nav-inner {
+  max-width: 1100px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 24px; height: 56px;
+}
+.nav-logo { font-weight: 700; color: var(--primary); font-size: 1.05rem; white-space: nowrap; }
+.nav-links {
+  display: flex; gap: 4px; overflow-x: auto;
+  scrollbar-width: none; -ms-overflow-style: none;
+}
+.nav-links::-webkit-scrollbar { display: none; }
+.nav-links a {
+  color: var(--text-muted); text-decoration: none; font-size: 0.82rem;
+  padding: 6px 10px; border-radius: 8px; white-space: nowrap;
+  transition: all 0.2s;
+}
+.nav-links a:hover { background: var(--gradient-light); color: var(--primary); }
+.nav-links a.back-link {
+  color: var(--primary); font-weight: 600;
+  border: 1.5px solid var(--primary); border-radius: 16px;
+  padding: 4px 14px;
+}
+.nav-links a.back-link:hover { background: var(--primary); color: #fff; }
+
+/* HERO */
+.hero {
+  min-height: 70vh;
+  background: linear-gradient(135deg, #0e7490 0%, #059669 40%, #0891b2 70%, #06b6d4 100%);
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; padding: 100px 24px 80px;
+  position: relative; overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+  background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  opacity: 0.5;
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-icon { font-size: 4rem; margin-bottom: 16px; filter: drop-shadow(0 4px 12px rgba(0,0,0,0.2)); }
+.hero-title {
+  font-size: clamp(1.8rem, 5vw, 3.2rem);
+  font-weight: 900; color: #fff;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.2);
+  line-height: 1.2; margin-bottom: 12px;
+}
+.hero-sub {
+  font-size: clamp(0.95rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.9); margin-bottom: 28px;
+  max-width: 600px;
+}
+.hero-badges {
+  display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;
+}
+.hero-badge {
+  background: rgba(255,255,255,0.2); backdrop-filter: blur(8px);
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #fff; padding: 6px 16px; border-radius: 20px;
+  font-size: 0.85rem; font-weight: 500;
+}
+.wave { position: absolute; bottom: 0; left: 0; right: 0; }
+
+/* SECTION */
+section { padding: 60px 24px; }
+.container { max-width: 1100px; margin: 0 auto; }
+.section-title {
+  font-size: clamp(1.4rem, 3.5vw, 2rem); font-weight: 800;
+  color: var(--text); margin-bottom: 6px;
+}
+.section-title span { color: var(--primary); }
+.section-sub { color: var(--text-muted); margin-bottom: 32px; font-size: 0.92rem; }
+
+/* INTRO CARDS */
+.intro-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px; margin-bottom: 32px;
+}
+.intro-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  padding: 24px; text-align: center;
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+.intro-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.intro-card .icon { font-size: 2.2rem; margin-bottom: 10px; }
+.intro-card .label { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 4px; }
+.intro-card .value { font-size: 1.1rem; font-weight: 700; color: var(--primary); }
+
+/* RESORT CARDS */
+.resort-grid { display: flex; flex-direction: column; gap: 24px; }
+.resort-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden; transition: box-shadow 0.25s, transform 0.25s;
+  position: relative;
+}
+.resort-card:hover { box-shadow: var(--shadow-hover); transform: translateY(-2px); }
+.resort-card.top-pick { border-left: 5px solid var(--accent); }
+.resort-card.best-value { border-left: 5px solid var(--secondary); }
+
+.resort-header {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  padding: 24px 28px 0; flex-wrap: wrap; gap: 12px;
+}
+.resort-name-area { flex: 1; min-width: 220px; }
+.resort-name { font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+.resort-name-en { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 8px; }
+.resort-tags { display: flex; gap: 6px; flex-wrap: wrap; }
+.resort-tag {
+  font-size: 0.72rem; font-weight: 600; padding: 2px 10px; border-radius: 10px;
+  background: var(--gradient-light); color: var(--primary);
+}
+.resort-tag.star { background: linear-gradient(135deg, #fcd34d, #f59e0b); color: #92400e; }
+.resort-tag.pick { background: var(--gradient); color: #fff; }
+.resort-tag.value { background: linear-gradient(135deg, #059669, #047857); color: #fff; }
+.resort-tag.romance { background: linear-gradient(135deg, #ec4899, #db2777); color: #fff; }
+.resort-tag.dive { background: linear-gradient(135deg, #3b82f6, #1d4ed8); color: #fff; }
+
+.resort-price-area { text-align: right; min-width: 140px; }
+.resort-price { font-size: 1.6rem; font-weight: 900; color: var(--primary); }
+.resort-price-unit { font-size: 0.78rem; color: var(--text-muted); }
+
+.resort-body { padding: 16px 28px 24px; }
+.resort-info-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px; margin-bottom: 16px;
+}
+.resort-info-item { display: flex; align-items: flex-start; gap: 8px; font-size: 0.88rem; }
+.resort-info-icon { font-size: 1.1rem; flex-shrink: 0; }
+.resort-info-label { color: var(--text-muted); font-size: 0.78rem; }
+.resort-info-value { font-weight: 500; }
+
+.resort-desc {
+  font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;
+  margin-bottom: 16px; padding: 14px 18px;
+  background: var(--gradient-light); border-radius: var(--radius-sm);
+}
+
+.resort-highlights {
+  display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 16px;
+}
+.highlight-chip {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 4px 12px; border-radius: 20px;
+  font-size: 0.78rem; font-weight: 600;
+  background: #f0f9ff; color: var(--primary-dark);
+  border: 1px solid var(--border);
+}
+
+.resort-links { display: flex; gap: 8px; flex-wrap: wrap; }
+.resort-link {
+  display: inline-flex; align-items: center; gap: 4px;
+  padding: 8px 16px; border-radius: 10px;
+  text-decoration: none; font-size: 0.82rem; font-weight: 600;
+  transition: all 0.2s;
+}
+.resort-link.primary { background: var(--gradient); color: #fff; }
+.resort-link.primary:hover { opacity: 0.85; }
+.resort-link.secondary {
+  background: transparent; color: var(--primary);
+  border: 1.5px solid var(--primary);
+}
+.resort-link.secondary:hover { background: var(--primary); color: #fff; }
+
+/* COMPARISON TABLE */
+.compare-wrap {
+  overflow-x: auto; border-radius: var(--radius);
+  box-shadow: var(--shadow); margin-bottom: 24px;
+}
+.compare-table {
+  width: 100%; border-collapse: separate; border-spacing: 0;
+  min-width: 700px;
+}
+.compare-table thead { background: var(--gradient); }
+.compare-table th {
+  color: #fff; padding: 14px 16px; font-size: 0.85rem;
+  font-weight: 700; text-align: left; white-space: nowrap;
+}
+.compare-table td {
+  padding: 12px 16px; border-bottom: 1px solid var(--border);
+  font-size: 0.85rem; background: var(--card-bg);
+}
+.compare-table tbody tr:last-child td { border-bottom: none; }
+.compare-table tbody tr:hover td { background: var(--gradient-light); }
+.compare-table .resort-name-cell { font-weight: 700; color: var(--primary-dark); white-space: nowrap; }
+
+/* ISLAND CARDS */
+.island-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px; margin-bottom: 24px;
+}
+.island-card {
+  background: var(--card-bg); border-radius: var(--radius); box-shadow: var(--shadow);
+  overflow: hidden; transition: transform 0.25s;
+}
+.island-card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover); }
+.island-banner {
+  height: 100px; display: flex; align-items: center; justify-content: center;
+  font-size: 3.5rem; position: relative;
+}
+.island-banner.kapalai { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+.island-banner.mabul { background: linear-gradient(135deg, #059669, #047857); }
+.island-banner.mataking { background: linear-gradient(135deg, #f59e0b, #d97706); }
+.island-banner.pompom { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+.island-info { padding: 20px; }
+.island-name { font-size: 1.1rem; font-weight: 800; margin-bottom: 4px; }
+.island-name-en { font-size: 0.78rem; color: var(--text-muted); margin-bottom: 10px; }
+.island-desc { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 12px; }
+.island-features {
+  display: flex; gap: 6px; flex-wrap: wrap;
+}
+.island-feat {
+  font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 10px;
+  background: var(--gradient-light); color: var(--primary);
+}
+
+/* TIMELINE */
+.booking-timeline {
+  position: relative; padding-left: 32px; margin: 24px 0;
+}
+.booking-timeline::before {
+  content: ''; position: absolute; left: 12px; top: 0; bottom: 0;
+  width: 2px; background: var(--border);
+}
+.timeline-item {
+  position: relative; margin-bottom: 24px;
+  background: var(--card-bg); border-radius: var(--radius-sm);
+  padding: 16px 20px; box-shadow: var(--shadow);
+}
+.timeline-item::before {
+  content: ''; position: absolute; left: -26px; top: 20px;
+  width: 14px; height: 14px; border-radius: 50%;
+  background: var(--primary); border: 3px solid #fff;
+  box-shadow: 0 0 0 2px var(--primary-light);
+}
+.timeline-item .time { font-size: 0.78rem; color: var(--primary); font-weight: 700; margin-bottom: 4px; }
+.timeline-item .title { font-weight: 700; margin-bottom: 4px; }
+.timeline-item .desc { font-size: 0.85rem; color: var(--text-muted); }
+
+/* TIP BOX */
+.tip-box {
+  background: linear-gradient(135deg, #fef3c7, #fde68a);
+  border-radius: var(--radius-sm); padding: 16px 20px;
+  font-size: 0.88rem; line-height: 1.8;
+  margin-top: 24px; border-left: 4px solid var(--accent);
+}
+.tip-box strong { color: #92400e; }
+
+.tip-box.info {
+  background: linear-gradient(135deg, #e0f2fe, #bae6fd);
+  border-left-color: var(--primary);
+}
+.tip-box.info strong { color: var(--primary-dark); }
+
+.tip-box.warning {
+  background: linear-gradient(135deg, #fef2f2, #fecaca);
+  border-left-color: #ef4444;
+}
+.tip-box.warning strong { color: #dc2626; }
+
+/* FAQ */
+.faq-grid { display: flex; flex-direction: column; gap: 12px; }
+.faq-item {
+  background: var(--card-bg); border-radius: var(--radius-sm);
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.faq-q {
+  padding: 16px 20px; font-weight: 700; font-size: 0.95rem;
+  cursor: pointer; display: flex; justify-content: space-between;
+  align-items: center; transition: background 0.2s;
+  user-select: none;
+}
+.faq-q:hover { background: var(--gradient-light); }
+.faq-q .arrow { color: var(--primary); transition: transform 0.3s; font-size: 1.1rem; }
+.faq-item.open .faq-q .arrow { transform: rotate(180deg); }
+.faq-a {
+  display: none; padding: 0 20px 16px;
+  font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;
+}
+.faq-item.open .faq-a { display: block; }
+
+/* DECISION TREE */
+.decision-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 16px; margin-bottom: 24px;
+}
+.decision-card {
+  background: var(--card-bg); border-radius: var(--radius);
+  box-shadow: var(--shadow); padding: 24px;
+  border-top: 4px solid var(--primary);
+  transition: transform 0.25s;
+}
+.decision-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
+.decision-card.romantic { border-top-color: #ec4899; }
+.decision-card.budget { border-top-color: var(--secondary); }
+.decision-card.diving { border-top-color: #3b82f6; }
+.decision-card.family { border-top-color: var(--accent); }
+.decision-icon { font-size: 2rem; margin-bottom: 10px; }
+.decision-title { font-weight: 700; margin-bottom: 6px; font-size: 1rem; }
+.decision-desc { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 12px; }
+.decision-pick {
+  font-size: 0.82rem; font-weight: 700; color: var(--primary);
+  padding: 6px 14px; background: var(--gradient-light);
+  border-radius: 8px; display: inline-block;
+}
+
+/* FOOTER */
+footer {
+  text-align: center; padding: 40px 24px;
+  color: var(--text-muted); font-size: 0.82rem;
+}
+footer a { color: var(--primary); text-decoration: none; font-weight: 600; }
+footer a:hover { text-decoration: underline; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .resort-header { flex-direction: column; }
+  .resort-price-area { text-align: left; }
+  .intro-grid { grid-template-columns: repeat(2, 1fr); }
+  .island-grid { grid-template-columns: 1fr; }
+  .decision-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <div class="nav-logo">🏝️ 水屋攻略</div>
+    <div class="nav-links">
+      <a href="travel-plan.html" class="back-link">← 返回行程</a>
+      <a href="hotels.html" class="back-link" style="border-color:var(--accent);color:var(--accent);">🏨 酒店攻略</a>
+      <a href="#islands">选岛指南</a>
+      <a href="#resorts">度假村详情</a>
+      <a href="#compare">对比总览</a>
+      <a href="#decision">怎么选</a>
+      <a href="#booking">预订攻略</a>
+      <a href="#faq">常见问题</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-content">
+    <div class="hero-icon">🏝️</div>
+    <div class="hero-title">仙本那水屋攻略</div>
+    <div class="hero-sub">在全球最清澈的海水上醒来 — 选岛、选房、预订全指南</div>
+    <div class="hero-badges">
+      <span class="hero-badge">🌊 6大度假村对比</span>
+      <span class="hero-badge">💰 ¥1,400 - 3,850 / 人</span>
+      <span class="hero-badge">📅 建议提前3-6个月预订</span>
+      <span class="hero-badge">🐠 含潜水浮潜配套</span>
+    </div>
+  </div>
+  <svg class="wave" viewBox="0 0 1440 80" fill="none"><path d="M0 40 C360 80 720 0 1080 40 C1260 60 1380 40 1440 40 V80 H0Z" fill="#f0f9ff"/></svg>
+</section>
+
+<!-- WHY WATER VILLA -->
+<section id="why">
+  <div class="container">
+    <h2 class="section-title">🤔 为什么要住<span>水屋</span>？</h2>
+    <p class="section-sub">仙本那拥有东南亚最负盛名的水屋群，性价比碾压马尔代夫</p>
+
+    <div class="intro-grid">
+      <div class="intro-card">
+        <div class="icon">🌅</div>
+        <div class="label">推窗即海</div>
+        <div class="value">360° 海景环绕</div>
+      </div>
+      <div class="intro-card">
+        <div class="icon">🐢</div>
+        <div class="label">阳台下水</div>
+        <div class="value">直接浮潜看海龟</div>
+      </div>
+      <div class="intro-card">
+        <div class="icon">💰</div>
+        <div class="label">性价比王</div>
+        <div class="value">马代 1/5 的价格</div>
+      </div>
+      <div class="intro-card">
+        <div class="icon">🎯</div>
+        <div class="label">一价全包</div>
+        <div class="value">住宿+三餐+潜水</div>
+      </div>
+      <div class="intro-card">
+        <div class="icon">🌊</div>
+        <div class="label">能见度极佳</div>
+        <div class="value">水下10-30米可见</div>
+      </div>
+      <div class="intro-card">
+        <div class="icon">📸</div>
+        <div class="label">出片率爆表</div>
+        <div class="value">Tiffany蓝 + 日落</div>
+      </div>
+    </div>
+
+    <div class="tip-box info">
+      <strong>💡 水屋 vs 镇上住宿：</strong>水屋度假村通常为「一价全包」套餐（3天2晚或4天3晚），包含住宿、三餐、每日跳岛浮潜/深潜、装备租赁和码头接送。虽然单价看起来贵，但算上餐饮和活动费用后，其实性价比很高。住镇上则更灵活，适合只想浮潜不想住水屋的旅客。
+    </div>
+  </div>
+</section>
+
+<!-- ISLANDS GUIDE -->
+<section id="islands" style="background: #f8fafc;">
+  <div class="container">
+    <h2 class="section-title">🗺️ <span>选岛</span>指南</h2>
+    <p class="section-sub">仙本那周边4大水屋岛屿，各有特色</p>
+
+    <div class="island-grid">
+      <div class="island-card">
+        <div class="island-banner kapalai">🏘️</div>
+        <div class="island-info">
+          <div class="island-name">卡帕莱 Kapalai</div>
+          <div class="island-name-en">位于诗巴丹和马布岛之间的沙洲</div>
+          <div class="island-desc">
+            东南亚最著名的水屋，严格来说不是岛——51间别墅小屋全部建在海上浅滩之上。慢潜（Muck Diving）天堂，能见度极好，可看到海龟、墨鱼、蓝环章鱼、海蛾等。日落时分水屋栈道拍照绝美。
+          </div>
+          <div class="island-features">
+            <span class="island-feat">浪漫首选</span>
+            <span class="island-feat">最美水屋</span>
+            <span class="island-feat">慢潜天堂</span>
+            <span class="island-feat">需提前半年订</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="island-card">
+        <div class="island-banner mabul">🐙</div>
+        <div class="island-info">
+          <div class="island-name">马布岛 Mabul</div>
+          <div class="island-name-en">距诗巴丹最近的岛屿，世界级漫潜圣地</div>
+          <div class="island-desc">
+            距离诗巴丹最近的住人岛屿，世界顶级漫潜之地。岛上有4座度假村，均为专业潜水中心，可提供诗巴丹岛潜水名额。海洋生物极其丰富，微距摄影的圣殿。想去诗巴丹潜水的首选基地。
+          </div>
+          <div class="island-features">
+            <span class="island-feat">潜水员首选</span>
+            <span class="island-feat">诗巴丹跳板</span>
+            <span class="island-feat">微距天堂</span>
+            <span class="island-feat">4家度假村</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="island-card">
+        <div class="island-banner mataking">🐢</div>
+        <div class="island-info">
+          <div class="island-name">马达京岛 Mataking</div>
+          <div class="island-name-en">一岛一酒店，退潮沙滩相连的双子岛</div>
+          <div class="island-desc">
+            由大马达京和小马达京组成，退潮时两岛之间的沙滩相连可步行穿越——这是马达京最标志性的画面。岛上有海龟养育基地，浮潜资源极其丰富。一岛一酒店的私密感无与伦比。
+          </div>
+          <div class="island-features">
+            <span class="island-feat">私密感最强</span>
+            <span class="island-feat">海龟基地</span>
+            <span class="island-feat">拖尾沙滩</span>
+            <span class="island-feat">需提前3月订</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="island-card">
+        <div class="island-banner pompom">🌴</div>
+        <div class="island-info">
+          <div class="island-name">邦邦岛 Pom Pom</div>
+          <div class="island-name-en">海龟产卵基地，沙滩屋+水屋双选</div>
+          <div class="island-desc">
+            相对小众的岛屿，海龟产卵基地之一。有沙滩屋和水屋两种房型可选，价格比卡帕莱和马布岛亲民。浮潜资源好，游客较少，适合带小孩的家庭或喜欢安静的旅客。
+          </div>
+          <div class="island-features">
+            <span class="island-feat">亲子友好</span>
+            <span class="island-feat">海龟产卵</span>
+            <span class="island-feat">人少安静</span>
+            <span class="island-feat">价格亲民</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DECISION HELPER -->
+<section id="decision">
+  <div class="container">
+    <h2 class="section-title">🎯 <span>怎么选</span>？看你是哪类人</h2>
+    <p class="section-sub">不同需求，最佳选择完全不同</p>
+
+    <div class="decision-grid">
+      <div class="decision-card romantic">
+        <div class="decision-icon">💕</div>
+        <div class="decision-title">情侣蜜月 / 求婚</div>
+        <div class="decision-desc">要浪漫氛围、日落栈道、海上日出，拍照出片率要高</div>
+        <div class="decision-pick">首选：卡帕莱水上屋</div>
+      </div>
+      <div class="decision-card diving">
+        <div class="decision-icon">🤿</div>
+        <div class="decision-title">潜水发烧友</div>
+        <div class="decision-desc">要去诗巴丹看海狼风暴，想刷瓶数，追求世界级潜点</div>
+        <div class="decision-pick">首选：马布岛 MWB / SWV</div>
+      </div>
+      <div class="decision-card budget">
+        <div class="decision-icon">💰</div>
+        <div class="decision-title">高性价比体验</div>
+        <div class="decision-desc">想体验水屋但预算有限，含跳岛游最好</div>
+        <div class="decision-pick">首选：新佳马达度假村</div>
+      </div>
+      <div class="decision-card family">
+        <div class="decision-icon">👨‍👩‍👧‍👦</div>
+        <div class="decision-title">亲子 / 安静度假</div>
+        <div class="decision-desc">带小孩出行，要安全、安静、有沙滩可以玩</div>
+        <div class="decision-pick">首选：邦邦岛龙珠度假村</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RESORTS DETAIL -->
+<section id="resorts" style="background: #f8fafc;">
+  <div class="container">
+    <h2 class="section-title">🏨 <span>度假村</span>详细介绍</h2>
+    <p class="section-sub">6大水屋度假村，从豪华到经济全覆盖</p>
+
+    <div class="resort-grid">
+
+      <!-- 1. KAPALAI -->
+      <div class="resort-card top-pick">
+        <div class="resort-header">
+          <div class="resort-name-area">
+            <div class="resort-name">卡帕莱水上屋</div>
+            <div class="resort-name-en">Sipadan-Kapalai Dive Resort</div>
+            <div class="resort-tags">
+              <span class="resort-tag pick">最热门</span>
+              <span class="resort-tag romance">蜜月首选</span>
+              <span class="resort-tag star">★★★★★</span>
+            </div>
+          </div>
+          <div class="resort-price-area">
+            <div class="resort-price">~¥3,200</div>
+            <div class="resort-price-unit">/人 · 3天2晚套餐</div>
+          </div>
+        </div>
+        <div class="resort-body">
+          <div class="resort-info-grid">
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📍</span>
+              <div><div class="resort-info-label">位置</div><div class="resort-info-value">诗巴丹与马布岛之间的沙洲之上</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏠</span>
+              <div><div class="resort-info-label">房型</div><div class="resort-info-value">51间水上别墅 · 全部建在海面之上</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🤿</span>
+              <div><div class="resort-info-label">潜水</div><div class="resort-info-value">无限次岸潜 + 3次船潜/天 · PADI 五星</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🍽️</span>
+              <div><div class="resort-info-label">餐饮</div><div class="resort-info-value">一价全包 · 三餐+下午茶+水果</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📅</span>
+              <div><div class="resort-info-label">预订</div><div class="resort-info-value">需提前 6 个月以上！旺季一房难求</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🚤</span>
+              <div><div class="resort-info-label">交通</div><div class="resort-info-value">斗湖机场接送 + 快艇上岛</div></div>
+            </div>
+          </div>
+          <div class="resort-desc">
+            <strong>仙本那最负盛名的水屋，没有之一。</strong>整个度假村建在海中沙洲之上，360度被碧蓝海水环绕，没有沙滩——你住在海面之上。日出从卧室窗户看，日落从栈道上看，脚下透明玻璃能直接观鱼。慢潜（Muck Diving）圣地，海蛾、蓝环章鱼、豆丁海马等稀有生物常见。适合蜜月、情侣、摄影爱好者。唯一缺点：太火爆，必须提前半年以上预订。
+          </div>
+          <div class="resort-highlights">
+            <span class="highlight-chip">🌅 日出日落双景</span>
+            <span class="highlight-chip">🐠 房间下方即珊瑚礁</span>
+            <span class="highlight-chip">📸 栈道拍照绝美</span>
+            <span class="highlight-chip">🤿 PADI五星潜水中心</span>
+            <span class="highlight-chip">🦑 蓝环章鱼常见</span>
+          </div>
+          <div class="resort-links">
+            <a href="https://www.sipadan-kapalai.com/" target="_blank" class="resort-link primary">官网预订 →</a>
+            <a href="https://www.agoda.com/sipadan-kapalai-dive-resort/hotel/semporna-my.html" target="_blank" class="resort-link secondary">Agoda</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 2. MWB -->
+      <div class="resort-card top-pick">
+        <div class="resort-header">
+          <div class="resort-name-area">
+            <div class="resort-name">马布岛水上屋 MWB</div>
+            <div class="resort-name-en">Mabul Water Bungalows (MWB)</div>
+            <div class="resort-tags">
+              <span class="resort-tag pick">最豪华</span>
+              <span class="resort-tag dive">潜水首选</span>
+              <span class="resort-tag star">★★★★★</span>
+            </div>
+          </div>
+          <div class="resort-price-area">
+            <div class="resort-price">~¥3,850</div>
+            <div class="resort-price-unit">/人 · 3天2晚套餐</div>
+          </div>
+        </div>
+        <div class="resort-body">
+          <div class="resort-info-grid">
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📍</span>
+              <div><div class="resort-info-label">位置</div><div class="resort-info-value">马布岛东北海域 · 距诗巴丹最近</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏠</span>
+              <div><div class="resort-info-label">房型</div><div class="resort-info-value">独栋水上别墅 · 私人阳台 · 超大空间</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🤿</span>
+              <div><div class="resort-info-label">潜水</div><div class="resort-info-value">可申请诗巴丹名额 · 无限岸潜+船潜</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🍽️</span>
+              <div><div class="resort-info-label">餐饮</div><div class="resort-info-value">一价全包 · 自助三餐 · 品质最高</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📅</span>
+              <div><div class="resort-info-label">预订</div><div class="resort-info-value">建议提前 3 个月以上</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏊</span>
+              <div><div class="resort-info-label">设施</div><div class="resort-info-value">泳池 · 餐厅 · 潜水中心 · SPA</div></div>
+            </div>
+          </div>
+          <div class="resort-desc">
+            <strong>仙本那最豪华的水屋度假村。</strong>独栋别墅比卡帕莱更大更私密，每间都有宽敞的私人阳台，可以直接跳入海中浮潜。餐饮品质是所有度假村中最高的。最大优势是距离诗巴丹最近，住客可优先申请诗巴丹潜水名额——这是持证潜水员的终极梦想。适合追求品质的潜水爱好者和蜜月旅客。
+          </div>
+          <div class="resort-highlights">
+            <span class="highlight-chip">🎯 诗巴丹名额优先</span>
+            <span class="highlight-chip">🏠 独栋别墅最宽敞</span>
+            <span class="highlight-chip">🍽️ 餐饮品质最佳</span>
+            <span class="highlight-chip">🏊 有泳池和SPA</span>
+            <span class="highlight-chip">🤿 专业潜水中心</span>
+          </div>
+          <div class="resort-links">
+            <a href="https://www.mabulwaterbungalows.com/" target="_blank" class="resort-link primary">官网预订 →</a>
+            <a href="https://www.agoda.com/mabul-water-bungalows/hotel/semporna-my.html" target="_blank" class="resort-link secondary">Agoda</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 3. SWV -->
+      <div class="resort-card">
+        <div class="resort-header">
+          <div class="resort-name-area">
+            <div class="resort-name">马布岛智能水屋 SWV</div>
+            <div class="resort-name-en">Sipadan Mabul Smart Village (SWV)</div>
+            <div class="resort-tags">
+              <span class="resort-tag dive">潜水推荐</span>
+              <span class="resort-tag star">★★★★</span>
+              <span class="resort-tag">性价比高</span>
+            </div>
+          </div>
+          <div class="resort-price-area">
+            <div class="resort-price">~¥2,800</div>
+            <div class="resort-price-unit">/人 · 3天2晚套餐</div>
+          </div>
+        </div>
+        <div class="resort-body">
+          <div class="resort-info-grid">
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📍</span>
+              <div><div class="resort-info-label">位置</div><div class="resort-info-value">马布岛海域 · 毗邻 MWB</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏠</span>
+              <div><div class="resort-info-label">房型</div><div class="resort-info-value">水上屋 · 空间略小于 MWB · 干净整洁</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🤿</span>
+              <div><div class="resort-info-label">潜水</div><div class="resort-info-value">可申请诗巴丹 · 免费浮潜装备</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🍽️</span>
+              <div><div class="resort-info-label">餐饮</div><div class="resort-info-value">一价全包 · 三餐 · 品质中上</div></div>
+            </div>
+          </div>
+          <div class="resort-desc">
+            <strong>MWB 的平价替代方案。</strong>同在马布岛海域，同样可以申请诗巴丹潜水名额，房间比 MWB 小一些但设施完善、干净整洁。包含免费浮潜装备，性价比在马布岛度假村中最高。如果你是潜水爱好者但预算不想拉到最高，SWV 是最佳折中选择。
+          </div>
+          <div class="resort-highlights">
+            <span class="highlight-chip">🎯 同样可申请诗巴丹</span>
+            <span class="highlight-chip">💰 比 MWB 便宜 ~1,000/人</span>
+            <span class="highlight-chip">🤿 免费浮潜装备</span>
+            <span class="highlight-chip">🏠 设施干净整洁</span>
+          </div>
+          <div class="resort-links">
+            <a href="https://www.sipadanmabulresort.com/" target="_blank" class="resort-link primary">官网预订 →</a>
+            <a href="https://www.agoda.com/sipadan-mabul-resort/hotel/semporna-my.html" target="_blank" class="resort-link secondary">Agoda</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 4. MATAKING -->
+      <div class="resort-card">
+        <div class="resort-header">
+          <div class="resort-name-area">
+            <div class="resort-name">马达京度假村</div>
+            <div class="resort-name-en">Mataking Island Reef Dive Resort</div>
+            <div class="resort-tags">
+              <span class="resort-tag romance">蜜月推荐</span>
+              <span class="resort-tag star">★★★★</span>
+              <span class="resort-tag">一岛一酒店</span>
+            </div>
+          </div>
+          <div class="resort-price-area">
+            <div class="resort-price">~¥3,000</div>
+            <div class="resort-price-unit">/人 · 3天2晚套餐</div>
+          </div>
+        </div>
+        <div class="resort-body">
+          <div class="resort-info-grid">
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📍</span>
+              <div><div class="resort-info-label">位置</div><div class="resort-info-value">马达京岛 · 仙本那东北约45分钟船程</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏠</span>
+              <div><div class="resort-info-label">房型</div><div class="resort-info-value">水屋 + 沙滩屋可选 · 不允许非住客上岛</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🐢</span>
+              <div><div class="resort-info-label">特色</div><div class="resort-info-value">海龟养育基地 · 退潮时双岛沙滩相连</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🤿</span>
+              <div><div class="resort-info-label">潜水</div><div class="resort-info-value">浮潜极佳 · 体验深潜 · 海底邮局</div></div>
+            </div>
+          </div>
+          <div class="resort-desc">
+            <strong>一岛一酒店，私密感无与伦比。</strong>非住客不能上岛，你拥有整座岛。退潮时大小马达京之间沙滩相连可步行穿越，这是马达京最标志性的画面。岛上有海龟养育基地，浮潜就能看到大量海龟。还有全球仅有几个的"海底邮局"，可以寄出防水明信片。适合追求私密和安静的情侣、蜜月旅客。
+          </div>
+          <div class="resort-highlights">
+            <span class="highlight-chip">🏝️ 一岛一酒店</span>
+            <span class="highlight-chip">🐢 海龟近距离接触</span>
+            <span class="highlight-chip">📮 海底邮局</span>
+            <span class="highlight-chip">🏖️ 退潮拖尾沙滩</span>
+          </div>
+          <div class="resort-links">
+            <a href="https://www.mataking.com/" target="_blank" class="resort-link primary">官网预订 →</a>
+            <a href="https://www.agoda.com/mataking-island-reef-dive-resort/hotel/semporna-my.html" target="_blank" class="resort-link secondary">Agoda</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 5. SINGAMATA -->
+      <div class="resort-card best-value">
+        <div class="resort-header">
+          <div class="resort-name-area">
+            <div class="resort-name">新佳马达度假村</div>
+            <div class="resort-name-en">Singamata Adventures & Reef Resort</div>
+            <div class="resort-tags">
+              <span class="resort-tag value">性价比之王</span>
+              <span class="resort-tag star">★★★</span>
+              <span class="resort-tag">含每日跳岛</span>
+            </div>
+          </div>
+          <div class="resort-price-area">
+            <div class="resort-price">~¥1,400</div>
+            <div class="resort-price-unit">/人 · 3天2晚套餐</div>
+          </div>
+        </div>
+        <div class="resort-body">
+          <div class="resort-info-grid">
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📍</span>
+              <div><div class="resort-info-label">位置</div><div class="resort-info-value">仙本那码头附近海域 · 离镇最近</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏠</span>
+              <div><div class="resort-info-label">房型</div><div class="resort-info-value">水屋 + 礁石屋 · 日落/日出朝向可选</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏝️</span>
+              <div><div class="resort-info-label">活动</div><div class="resort-info-value">每日跳岛游含在套餐内！</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🍽️</span>
+              <div><div class="resort-info-label">餐饮</div><div class="resort-info-value">一价全包 · 三餐 · 口味不错</div></div>
+            </div>
+          </div>
+          <div class="resort-desc">
+            <strong>体验水屋的最低门槛，性价比无敌。</strong>价格只有卡帕莱的一半不到，但同样是海上水屋、一价全包。最大亮点是每日跳岛游包含在套餐中，不像其他度假村主要在自家岛浮潜。离仙本那镇最近，交通最方便。水屋设施不算豪华但干净舒适，日落朝向的房间看日落很美。预算有限但想体验水屋的首选！
+          </div>
+          <div class="resort-highlights">
+            <span class="highlight-chip">💰 价格仅卡帕莱的 43%</span>
+            <span class="highlight-chip">🏝️ 每日跳岛游含在内</span>
+            <span class="highlight-chip">🌅 日落房型绝美</span>
+            <span class="highlight-chip">🚤 离镇最近交通方便</span>
+          </div>
+          <div class="resort-links">
+            <a href="https://singamata.com/" target="_blank" class="resort-link primary">官网预订 →</a>
+            <a href="https://www.agoda.com/singamata-adventures-reef-resort/hotel/semporna-my.html" target="_blank" class="resort-link secondary">Agoda</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- 6. POMPOM -->
+      <div class="resort-card">
+        <div class="resort-header">
+          <div class="resort-name-area">
+            <div class="resort-name">邦邦岛龙珠度假村</div>
+            <div class="resort-name-en">Pom Pom Island Resort (Celebes Beach Resort)</div>
+            <div class="resort-tags">
+              <span class="resort-tag star">★★★★</span>
+              <span class="resort-tag">亲子友好</span>
+              <span class="resort-tag">海龟基地</span>
+            </div>
+          </div>
+          <div class="resort-price-area">
+            <div class="resort-price">~¥2,500</div>
+            <div class="resort-price-unit">/人 · 3天2晚套餐</div>
+          </div>
+        </div>
+        <div class="resort-body">
+          <div class="resort-info-grid">
+            <div class="resort-info-item">
+              <span class="resort-info-icon">📍</span>
+              <div><div class="resort-info-label">位置</div><div class="resort-info-value">邦邦岛 · 仙本那东北约40分钟船程</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏠</span>
+              <div><div class="resort-info-label">房型</div><div class="resort-info-value">沙滩屋 + 水屋双选 · 带小孩建议沙滩屋</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🐢</span>
+              <div><div class="resort-info-label">特色</div><div class="resort-info-value">海龟产卵保育基地 · 夜间可观海龟上岸</div></div>
+            </div>
+            <div class="resort-info-item">
+              <span class="resort-info-icon">🏖️</span>
+              <div><div class="resort-info-label">沙滩</div><div class="resort-info-value">白沙滩很美 · 适合玩沙和浅水浮潜</div></div>
+            </div>
+          </div>
+          <div class="resort-desc">
+            <strong>亲子家庭的理想选择。</strong>既有水屋也有沙滩屋，带小孩的家庭可以选择安全的沙滩屋，在白沙滩上玩耍。岛上是海龟产卵基地，运气好夜晚可以看到海龟上岸产卵（5-9月是产卵季）。浮潜资源好，游客比卡帕莱和马布少很多，整体氛围安静悠闲。价格在中档，兼顾品质和性价比。
+          </div>
+          <div class="resort-highlights">
+            <span class="highlight-chip">👨‍👩‍👧 最适合带小孩</span>
+            <span class="highlight-chip">🐢 海龟产卵观赏</span>
+            <span class="highlight-chip">🏖️ 白沙滩很美</span>
+            <span class="highlight-chip">🔇 人少安静</span>
+          </div>
+          <div class="resort-links">
+            <a href="https://www.pompomislandresort.com/" target="_blank" class="resort-link primary">官网预订 →</a>
+            <a href="https://www.agoda.com/pom-pom-island-resort/hotel/semporna-my.html" target="_blank" class="resort-link secondary">Agoda</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- COMPARISON TABLE -->
+<section id="compare">
+  <div class="container">
+    <h2 class="section-title">📊 <span>度假村</span>对比总览</h2>
+    <p class="section-sub">一张表看清所有水屋的核心差异</p>
+
+    <div class="compare-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th>度假村</th>
+            <th>价格/人</th>
+            <th>位置</th>
+            <th>房型</th>
+            <th>最大亮点</th>
+            <th>适合人群</th>
+            <th>提前预订</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="resort-name-cell">卡帕莱水上屋</td>
+            <td><strong>~¥3,200</strong></td>
+            <td>沙洲海上</td>
+            <td>纯水屋</td>
+            <td>最美水屋 · 日出日落</td>
+            <td>情侣蜜月</td>
+            <td style="color:#ef4444;font-weight:700;">6个月+</td>
+          </tr>
+          <tr>
+            <td class="resort-name-cell">马布岛 MWB</td>
+            <td><strong>~¥3,850</strong></td>
+            <td>马布岛</td>
+            <td>独栋水屋</td>
+            <td>最豪华 · 诗巴丹名额</td>
+            <td>潜水+品质</td>
+            <td style="color:#f59e0b;font-weight:700;">3个月+</td>
+          </tr>
+          <tr>
+            <td class="resort-name-cell">马布岛 SWV</td>
+            <td><strong>~¥2,800</strong></td>
+            <td>马布岛</td>
+            <td>水屋</td>
+            <td>性价比 · 诗巴丹名额</td>
+            <td>潜水爱好者</td>
+            <td style="color:#f59e0b;font-weight:700;">3个月+</td>
+          </tr>
+          <tr>
+            <td class="resort-name-cell">马达京度假村</td>
+            <td><strong>~¥3,000</strong></td>
+            <td>马达京岛</td>
+            <td>水屋+沙滩屋</td>
+            <td>一岛一酒店 · 海底邮局</td>
+            <td>蜜月/安静</td>
+            <td style="color:#f59e0b;font-weight:700;">3个月+</td>
+          </tr>
+          <tr>
+            <td class="resort-name-cell">新佳马达</td>
+            <td><strong style="color:var(--secondary)">~¥1,400</strong></td>
+            <td>仙本那近海</td>
+            <td>水屋+礁石屋</td>
+            <td>最便宜 · 含每日跳岛</td>
+            <td>预算有限</td>
+            <td style="color:var(--secondary);font-weight:700;">1-2个月</td>
+          </tr>
+          <tr>
+            <td class="resort-name-cell">邦邦岛龙珠</td>
+            <td><strong>~¥2,500</strong></td>
+            <td>邦邦岛</td>
+            <td>水屋+沙滩屋</td>
+            <td>亲子友好 · 海龟产卵</td>
+            <td>亲子家庭</td>
+            <td style="color:#f59e0b;font-weight:700;">2-3个月</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="tip-box">
+      <strong>💡 价格说明：</strong>以上价格均为 3天2晚一价全包套餐的人均参考价，包含住宿、三餐、浮潜/深潜活动、装备租赁和码头接送。实际价格随季节和房型浮动，旺季（7-8月、国庆、春节）价格可能上浮 20-30%。<strong>4月属于淡旺季过渡期，价格相对友好。</strong>
+    </div>
+  </div>
+</section>
+
+<!-- BOOKING GUIDE -->
+<section id="booking" style="background: #f8fafc;">
+  <div class="container">
+    <h2 class="section-title">📅 <span>预订</span>攻略</h2>
+    <p class="section-sub">水屋预订有门道，提前规划是关键</p>
+
+    <div class="booking-timeline">
+      <div class="timeline-item">
+        <div class="time">出发前 6 个月</div>
+        <div class="title">确定度假村 & 抢订卡帕莱</div>
+        <div class="desc">卡帕莱是最难订的，旺季需要提前半年甚至更久。确定日期后第一时间联系官网或代理预订。其他度假村也建议这时候开始关注。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">出发前 3 个月</div>
+        <div class="title">预订其他度假村 + 机票</div>
+        <div class="desc">马布岛（MWB/SWV）、马达京、邦邦岛此时预订基本没问题。同时购买国际机票和内段机票（亚庇→斗湖）。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">出发前 1-2 个月</div>
+        <div class="title">预订新佳马达 + 镇上住宿</div>
+        <div class="desc">新佳马达比较容易订到，可以稍晚预订。同时预订仙本那镇上和亚庇的酒店。购买旅游保险。</div>
+      </div>
+      <div class="timeline-item">
+        <div class="time">出发前 2 周</div>
+        <div class="title">确认所有预订 + 准备装备</div>
+        <div class="desc">和度假村确认接送时间和注意事项。准备防晒霜、浮潜咬嘴、防水手机壳等装备。填写 MDAC 入境卡。</div>
+      </div>
+    </div>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; margin-top: 32px;">
+      <div class="tip-box info" style="margin-top:0;">
+        <strong>📱 预订渠道推荐：</strong><br>
+        1. <strong>度假村官网</strong> — 价格最透明，房型最全<br>
+        2. <strong>淘宝/飞猪代理</strong> — 中文沟通方便，有时有独家折扣<br>
+        3. <strong>Agoda / Booking</strong> — 可比价，支持免费取消<br>
+        4. <strong>小红书/马蜂窝代理</strong> — 可参考真实评价后联系
+      </div>
+      <div class="tip-box warning" style="margin-top:0;">
+        <strong>⚠️ 预订注意事项：</strong><br>
+        1. 确认套餐是否含<strong>斗湖接送</strong>（部分不含）<br>
+        2. 确认是<strong>水屋</strong>还是沙滩屋（同一度假村可能有两种）<br>
+        3. 注意<strong>最少入住天数</strong>要求（通常3天2晚起）<br>
+        4. 询问<strong>取消政策</strong>，尤其是通过代理预订时<br>
+        5. 确认是否含<strong>潜水/浮潜装备</strong>和活动
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="container">
+    <h2 class="section-title">❓ <span>常见</span>问题</h2>
+    <p class="section-sub">关于仙本那水屋的高频疑问</p>
+
+    <div class="faq-grid">
+      <div class="faq-item" id="faq1">
+        <div class="faq-q" onclick="toggleFaq('faq1')">
+          <span>不会游泳可以住水屋吗？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          <strong>完全可以！</strong>浮潜穿救生衣，教练全程陪同，不会游泳也能安全体验。水屋阳台虽然可以下水，但不是强制的。很多住客就是在栈道上看风景、拍照、发呆，享受海上生活。
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq2">
+        <div class="faq-q" onclick="toggleFaq('faq2')">
+          <span>水屋会不会晃？晕船的人能住吗？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          水屋建在木桩上，<strong>不会像船一样晃动</strong>。风大时可能会有轻微摇晃感和海浪声，但绝大多数人完全没问题。如果你严重晕船，建议选择新佳马达（近岸海域，更稳）或邦邦岛的沙滩屋。
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq3">
+        <div class="faq-q" onclick="toggleFaq('faq3')">
+          <span>水屋有空调、热水、WiFi 吗？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          <strong>空调和热水</strong>所有水屋都有。<strong>WiFi</strong> 情况各异：卡帕莱和 MWB 有但信号不稳定，新佳马达相对好一些（离镇近）。建议自备 CelcomDigi SIM 卡，东马信号覆盖最好。岛上的网络体验不要抱太高期望——这正是度假的意义。
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq4">
+        <div class="faq-q" onclick="toggleFaq('faq4')">
+          <span>只住 1 晚水屋可以吗？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          大部分度假村<strong>最少要求 3天2晚</strong>（即2个晚上）起订，极少数接受1晚。建议至少住2晚：第一天下午到、适应环境、看日落；第二天全天浮潜/深潜；第三天上午再浮一次然后离开。2晚的节奏刚好。
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq5">
+        <div class="faq-q" onclick="toggleFaq('faq5')">
+          <span>4月去水屋天气怎么样？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          4月是雨季到旱季的过渡期，<strong>整体适合</strong>。降雨来得快去得快，极少连阴雨。海水温度 27-29°C，非常舒适。能见度也不错。不是最佳季节（5-9月），但性价比更高——旺季价格贵且一房难求，4月预订压力小很多。
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq6">
+        <div class="faq-q" onclick="toggleFaq('faq6')">
+          <span>镇上住几晚 + 水屋住几晚比较合理？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          <strong>推荐：镇上 2 晚 + 水屋 2 晚。</strong>镇上住2晚参加跳岛游（敦沙卡兰、马达京三岛线），然后入住水屋2晚深度体验海上生活。如果预算充裕，镇上1晚 + 水屋3晚也很好。纯住水屋不去镇上跳岛会少了很多风景。
+        </div>
+      </div>
+
+      <div class="faq-item" id="faq7">
+        <div class="faq-q" onclick="toggleFaq('faq7')">
+          <span>水屋安全吗？晚上会不会害怕？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">
+          所有推荐的度假村都有安保和工作人员24小时驻守，<strong>非常安全</strong>。晚上海浪声其实很助眠。卡帕莱和马布岛距离军方驻守的诗巴丹不远，安全系数很高。唯一需要注意的是水屋栈道晚上灯光可能不够亮，走路小心即可。
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BUDGET SECTION -->
+<section id="budget" style="background: linear-gradient(135deg, #f0f9ff, #d1fae5);">
+  <div class="container">
+    <h2 class="section-title">💰 水屋<span>预算参考</span></h2>
+    <p class="section-sub">2人出行，不同预算方案对比</p>
+
+    <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);border-top:4px solid var(--secondary);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">💚</div>
+        <div style="font-weight:800;font-size:1.1rem;margin-bottom:4px;">经济方案</div>
+        <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;">新佳马达 3天2晚</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--secondary);margin-bottom:8px;">~¥2,800</div>
+        <div style="font-size:0.82rem;color:var(--text-muted);">2人合计 · 含住宿+三餐+每日跳岛</div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid var(--border);">
+        <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.8;">
+          水屋体验 ✓<br>
+          一价全包 ✓<br>
+          每日跳岛 ✓<br>
+          日落海景 ✓<br>
+          设施简约但干净
+        </div>
+      </div>
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);border-top:4px solid var(--primary);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">💙</div>
+        <div style="font-weight:800;font-size:1.1rem;margin-bottom:4px;">推荐方案</div>
+        <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;">卡帕莱/马达京 3天2晚</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--primary);margin-bottom:8px;">~¥6,000-6,400</div>
+        <div style="font-size:0.82rem;color:var(--text-muted);">2人合计 · 含住宿+三餐+潜水</div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid var(--border);">
+        <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.8;">
+          经典水屋体验 ✓✓<br>
+          一价全包 ✓<br>
+          浮潜/深潜 ✓<br>
+          绝美日落栈道 ✓<br>
+          拍照出片超美
+        </div>
+      </div>
+
+      <div style="background:var(--card-bg);border-radius:var(--radius);padding:24px;box-shadow:var(--shadow);border-top:4px solid var(--accent);">
+        <div style="font-size:1.5rem;margin-bottom:8px;">💛</div>
+        <div style="font-weight:800;font-size:1.1rem;margin-bottom:4px;">豪华方案</div>
+        <div style="font-size:0.82rem;color:var(--text-muted);margin-bottom:16px;">MWB 3天2晚 + 诗巴丹</div>
+        <div style="font-size:2rem;font-weight:900;color:var(--accent);margin-bottom:8px;">~¥7,700</div>
+        <div style="font-size:0.82rem;color:var(--text-muted);">2人合计 · 含住宿+三餐+潜水</div>
+        <hr style="margin:16px 0;border:none;border-top:1px solid var(--border);">
+        <div style="font-size:0.85rem;color:var(--text-muted);line-height:1.8;">
+          最豪华水屋 ✓✓✓<br>
+          一价全包 ✓<br>
+          诗巴丹名额 ✓<br>
+          独栋别墅 ✓<br>
+          泳池+SPA ✓
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p style="margin-bottom:8px;">🏝️ 仙本那水屋攻略 · 选岛选房全指南</p>
+  <p style="margin-bottom:16px;">价格数据更新于 2026 年 3 月 · 实际价格以度假村官网为准</p>
+  <p style="margin-bottom:8px;">
+    <a href="travel-plan.html">← 返回行程规划</a> ·
+    <a href="hotels.html">🏨 酒店攻略</a>
+  </p>
+  <p style="font-size:0.75rem;color:var(--text-muted);">
+    在线链接：<a href="https://valiant-wjl.github.io/trip/Malaysia/water-villa.html">水屋攻略</a> ·
+    <a href="https://valiant-wjl.github.io/trip/Malaysia/travel-plan.html">行程规划</a> ·
+    <a href="https://valiant-wjl.github.io/trip/Malaysia/hotels.html">酒店攻略</a>
+  </p>
+</footer>
+
+<script>
+function toggleFaq(id) {
+  const item = document.getElementById(id);
+  item.classList.toggle('open');
+}
+
+// Smooth scroll offset for fixed nav
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    e.preventDefault();
+    const target = document.querySelector(a.getAttribute('href'));
+    if (target) {
+      const offset = 80;
+      const top = target.getBoundingClientRect().top + window.pageYOffset - offset;
+      window.scrollTo({ top, behavior: 'smooth' });
+    }
+  });
+});
+</script>
+
+</body>
+</html>
